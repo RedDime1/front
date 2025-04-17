@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Strapi HTML Example</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
+  <script src="https://unpkg.com/mustache@latest"></script>
 </head>
 <body>
+<div id="content">Start</div>
+<template id="person-template">
+  <h1>{{name}}</h1>
+  <p>{{description}}</p>
+  <iframe src="https://docs.google.com/presentation/d/e/{{link}}/pubembed?start=false&loop=false&delayms=10000" frameborder="0" width="320" height="195" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+  <p>Выступающие: </p>
+  {{#speakers}}
+  <h3>{{name}}</h3>
+  {{/speakers}}
 
+</template>
+
+<div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/presentations/1" hx-trigger="load" hx-swap="innerHTML"
+     hx-target="#content"
+     hx-ext="client-side-templates"
+     mustache-template="person-template">
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const presentationId = urlParams.get('id') || '1';
+  document.addEventListener('DOMContentLoaded', () => {
+    const contentDiv = document.getElementById('content');
+    contentDiv.setAttribute(
+            'hx-get',
+            `https://hopeful-compassion-dc535509c0.strapiapp.com/api/presentations/${presentationId}`
+    );
+  });
+</script>
 </body>
 </html>
