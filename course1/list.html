@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список презентаций по курсу 1</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
+  <script src="https://unpkg.com/mustache@latest"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card {
+      width: 300px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      padding: 15px;
+      text-align: center;
+    }
+    .card-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .card-text {
+      color: #333;
+      font-size: 14px;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="content">Start</div>
+<template id="person-template">
+  {{#data}}
+  <div class="card">
+    <h2>{{name}}</h2>
+    <a href="/presentation/{{id}}">
+      <img src={{preview}} width="400" class="card-image">
+    </a>
+    <p class="card-text">{{description}}</p>
+    <p>Выступающие: </p>
+    {{#speakers}}
+    <h3>{{name}}</h3>
+    {{/speakers}}
+  </div>
+  {{/data}}
+</template>
+
+<div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/presentations" hx-trigger="load" hx-swap="innerHTML"
+     hx-target="#content"
+     hx-ext="client-side-templates"
+     mustache-array-template="person-template">
+</div>
+</body>
+</html>
