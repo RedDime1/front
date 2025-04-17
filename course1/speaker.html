@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Презентация</title>
+  <title>Резюме</title>
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
   <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
   <script src="https://unpkg.com/mustache@latest"></script>
@@ -12,19 +12,18 @@
   <h1>Загрузка</h1>
 </div>
 <template id="person-template">
-  <h1>{{name}}</h1>
-  <p>{{description}}</p>
-  <iframe src="https://docs.google.com/presentation/d/e/{{link}}/pubembed?start=false&loop=false&delayms=10000" frameborder="0" width="320" height="195" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-  <p>Выступающие: </p>
-  {{#speakers}}
-  <a href="./speaker?id={{id}}">
-    <h3>{{name}}</h3>
-  </a>
-  {{/speakers}}
-
+  <h2>{{name}}</h2>
+  <h3>Education:</h3>
+  <ul>
+    {{#education}}
+    <li>{{degree}} at {{uni}} ({{duration}})</li>
+    {{/education}}
+    {{^education}}<p>No education data<p>{{/education}}
+  </ul>
+  <p>My phone: {{contacts.phone}}. Lorem ipsum............ My mail: <span style="font-weight:bold">{{contacts.mail}}</span></p>
 </template>
 
-<div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
+<div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/resume"  hx-trigger="load" hx-swap="innerHTML"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
      hx-target="#content"
      hx-ext="client-side-templates"
