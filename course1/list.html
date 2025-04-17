@@ -57,7 +57,9 @@
     <p class="card-text">{{description}}</p>
     <p>Выступающие: </p>
     {{#speakers}}
-    <h3>{{name}}</h3>
+    <a href="./speaker?id={{id}}">
+      <h3>{{name}}</h3>
+    </a>
     {{/speakers}}
   </div>
   {{/data}}
