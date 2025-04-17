@@ -2,40 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Strapi HTML Example</title>
-  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-  <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
-  <script src="https://unpkg.com/mustache@latest"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Центрированная ссылка</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+    a {
+      font-size: 24px;
+      text-decoration: none;
+      color: #0066cc;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-<div id="content">Start</div>
-<template id="person-template">
-  {{#data}}
-  <h1>{{name}}</h1>
-  <p>{{description}}</p>
-  <img src={{preview}} width="400"/>
-  <p>Выступающие: </p>
-  {{#speakers}}
-  <h3>{{name}}</h3>
-  {{/speakers}}
-  {{/data}}
-
-</template>
-
-<div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/presentations" hx-trigger="load" hx-swap="innerHTML"
-     hx-target="#content"
-     hx-ext="client-side-templates"
-     mustache-array-template="person-template">
-</div>
-
-<style>
-  h2 {
-    color: red;
-  }
-
-  img {
-    border: black solid 1px;
-  }
-</style>
+<a href="/courses">Нажми на меня</a>
 </body>
 </html>
