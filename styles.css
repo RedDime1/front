@@ -114,11 +114,15 @@ a {
 }
 .door {
     height: 90%;
-    width: 675px;
+    width: 35%;
     background-color: saddlebrown;
     color: white;
     overflow: auto;
     text-align: center;
     font-size: 60px;
     align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
