@@ -1,0 +1,60 @@
+body {
+	background-image: url("images/Дизайн\ Интерьера\ Для\ Бара.jpg");
+	background-repeat: repeat-y;
+	background-size: 100%;
+}
+
+main {
+	display: flex;
+	justify-content: space-between;
+	/* gap: 10%; */
+	/* box-sizing: border-box; */
+	margin: 5% 5%;
+}
+
+.lector {
+	border: 2px solid #fff;
+	border-radius: 10px;
+	box-shadow: 
+		0 0 5px #fff,
+		0 0 10px #fff,
+		0 0 15px rgb(162, 8, 193),
+		0 0 20px rgb(162, 8, 193);
+	color: #fff;
+	background-color: #000;
+	max-width: 400px;
+}
+
+.lector:hover {
+	color: aqua;
+	transform: scale(1.10);
+}
+
+.lector-header {
+	font-size: 27px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	text-shadow: 
+		0 0 5px #fff,
+		0 0 10px #fff,
+		0 0 15px rgb(162, 8, 193),
+		0 0 20px rgb(162, 8, 193);
+	color: #fff;
+}
+
+.lector-footer {
+	font-size: 20px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	text-shadow: 
+		0 0 5px #fff,
+		0 0 10px #fff,
+		0 0 15px rgb(162, 8, 193),
+		0 0 20px rgb(162, 8, 193);
+	color: #fff;
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+}
