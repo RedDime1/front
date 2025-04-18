@@ -12,15 +12,60 @@
   <h1>Загрузка</h1>
 </div>
 <template id="person-template">
-  <h2>{{name}}</h2>
-  <h3>Education:</h3>
-  <ul>
-    {{#education}}
-    <li>{{degree}} at {{uni}} ({{duration}})</li>
-    {{/education}}
-    {{^education}}<p>No education data<p>{{/education}}
-  </ul>
-  <p>My phone: {{contacts.phone}}. Lorem ipsum............ My mail: <span style="font-weight:bold">{{contacts.mail}}</span></p>
+  <div class="header">
+    <h1>{{name}}</h1>
+    {{#contacts}}
+    <div class="contacts">
+      <div class="contact-item">📧 {{mail}}</div>
+      <div class="contact-item">📞 {{phone}}</div>
+      <div class="contact-item">🏠 {{adress}}</div>
+      <div class="contact-item">👨‍💻 <a href="{{github}}" target="_blank">{{github}}</a></div>
+    </div>
+    {{/contacts}}
+    {{^contacts}}<p>Он у нас скромняшка<p>{{/contacts}}
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Education</h2>
+    <ul>
+      {{#education}}
+      <li>{{degree}} at {{uni}} ({{duration}})</li>
+      {{/education}}
+      {{^education}}<p>Грамотный и ладно<p>{{/education}}
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Work Experience</h2>
+    <div class="work-list">
+      {{#work_expirience}}
+      <div class="work-item">
+        <div class="job-name">{{job_name}}</div>
+        <div class="company-name">{{company_name}}</div>
+        <div class="job-location">{{job_location}}</div>
+        <div class="duration">{{duration}}</div>
+        <div class="job-description">
+          {{job_description}}
+        </div>
+      </div>
+      {{/work_expirience}}
+      {{^work_expirience}}<p>Своё ещё наработает<p>{{/work_expirience}}
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Personality Traits</h2>
+    {{#personality}}
+    <div class="personality-traits">
+      <div>Energy: {{energy}}/100</div>
+      <div>Mind: {{mind}}/100</div>
+      <div>Nature: {{nature}}/100</div>
+      <div>Tactics: {{tactics}}/100</div>
+      <div>Personality: {{personality}}/100</div>
+    </div>
+    {{/personality}}
+    {{^personality}}<p>Мы не знаем его тип личности</p>{{/personality}}
+  </div>
 </template>
 
 <div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/resume"  hx-trigger="load" hx-swap="innerHTML"
@@ -30,6 +75,52 @@
      mustache-template="person-template">
 </div>
 
-
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 20px;
+  }
+  h1 {
+    margin-bottom: 5px;
+    color: #2c3e50;
+  }
+  .section {
+    margin-bottom: 25px;
+  }
+  .section-title {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    color: #2c3e50;
+  }
+  .work-item {
+    margin-bottom: 15px;
+  }
+  .job-name {
+    font-weight: bold;
+  }
+  .duration {
+    color: #7f8c8d;
+    font-style: italic;
+  }
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+  }
+</style>
 </body>
 </html>
