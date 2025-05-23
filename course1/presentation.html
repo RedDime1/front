@@ -44,6 +44,10 @@
   </a>
   {{/speakers}}
   {{^speakers}}<p>Спикеры этой лекции не предусмотрены</p>{{/speakers}}
+  <p>Тэги:
+    {{#tags}}
+    <a href="/tagSearch.html">#{{name}}</a>
+    {{/tags}}</p>
   <div class="comment-form">
     <h2>Оставить комментарий</h2>
     <form id="comment-form"
