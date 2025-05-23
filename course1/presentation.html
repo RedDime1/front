@@ -49,39 +49,32 @@
     <form id="comment-form"
           hx-post="https://prized-hero-09a7ef40d2.strapiapp.com/api/comments"
           hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+          hx-target="#status"
     >
 
-      <input type="hidden" name="data[presentation_id]" id="presentation-id" value="{{id}}">
+      <input type="hidden" name="presentation_id" id="presentation-id" value="{{id}}">
 
       <div class="form-group">
         <label for="text_comment">Ваш комментарий:</label>
-        <textarea id="text_comment" name="data[text_comment]" required></textarea>
+        <textarea id="text_comment" name="text_comment" required></textarea>
       </div>
 
       <div class="form-group">
-        <label for="rate">Оценка (1-10):</label>
-        <select id="rate" name="data[rate]" class="rating-select" required>
+        <label for="rate">Оценка (1-5):</label>
+        <select id="rate" name="rate" class="rating-select" required>
           <option value="">Выберите оценку</option>
-          <option value="1">1 - Плохо</option>
+          <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-          <option value="5">5 - Средне</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10 - Отлично</option>
+          <option value="5">5</option>
         </select>
-      </div>
-
-      <div class="form-group">
-        <label for="name">Ваше имя:</label>
-        <input type="text" id="name" name="data[name]">
       </div>
 
       <button type="submit">Отправить отзыв</button>
     </form>
+    <div id="status">
+    </div>
   </div>
   <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/comments?filters[presentation_id][$eq]={{id}}"
        hx-target="#comments"
@@ -97,8 +90,10 @@
 
 <template id="comments-template">
   {{#data}}
-  <h2>{{name}}</h2>
-  <p>{{text_comment}}</p>
+  <h2>Имя комментатора: {{name}}</h2>
+  <p>Текст: {{text_comment}}</p>
+  <p>Оценка: {{rate}}/5</p>
+  <p>Дата: {{date}}/5</p>
   {{/data}}
 </template>
 
@@ -108,6 +103,14 @@
      hx-ext="client-side-templates"
      mustache-template="presentation-template">
 </div>
+
+<script>
+  document.body.addEventListener('htmx:afterRequest', function (evt) {
+    if (evt.detail.elt.getAttribute('hx-post') && !evt.detail.successful) {
+      document.getElementById('status').innerHTML = JSON.parse(evt.detail.xhr.responseText).error.message;
+    }
+  });
+</script>
 
 
 
