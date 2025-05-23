@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .auth-container {
+            display: flex;
+            gap: 20px;
+        }
+        .auth-form {
+            flex: 1;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .logout-btn {
+            background-color: #f44336;
+        }
+        .logout-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+<div id="auth-status">
+</div>
+
+
+<div class="auth-container" id="auth-forms" style="display: none;">
+    <div class="auth-form">
+        <h2>Вход</h2>
+        <form id="login-form" hx-post="https://prized-hero-09a7ef40d2.strapiapp.com/api/auth/local"  hx-swap="none">
+            <input type="text" name="identifier" placeholder="Email или логин" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
+            <div id="login-error" class="error"></div>
+        </form>
+    </div>
+
+    <div class="auth-form">
+        <h2>Регистрация</h2>
+        <form id="register-form" hx-post="https://prized-hero-09a7ef40d2.strapiapp.com//api/auth/local/register" hx-swap="none">
+            <input type="text" name="username" placeholder="Логин" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit">Зарегистрироваться</button>
+            <div id="register-error" class="error"></div>
+        </form>
+    </div>
+</div>
+
+<template id="login-template">
+    <h1>Вы уже авторизованы, {{username}}</h1>
+    <h2>Ваша почта: {{email}}</h2>
+    <h3>Если это не вы, то можете выйти:</h3>
+    <button class="logout-btn" onclick="logout()">Выйти</button>
+    <button class="index-btn" onclick="tohub()">На главную страницу</button>
+</template>
+
+
+<div id="me-info"
+     hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/users/me"
+     hx-target="#auth-status"
+     hx-trigger="load"
+     hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+     hx-ext="client-side-templates"
+     mustache-template="login-template">
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const jwt = localStorage.getItem('jwt');
+        const authForms = document.getElementById('auth-forms');
+        if (!jwt) {
+            authForms.style.display = 'flex';
+        }
+    });
+
+    document.body.addEventListener('htmx:afterRequest', function (evt) {
+        const forms = ['https://prized-hero-09a7ef40d2.strapiapp.com/local/register', 'https://prized-hero-09a7ef40d2.strapiapp.com/api/auth/local'];
+
+        if (forms.includes(evt.detail.requestConfig.path) && evt.detail.successful) {
+            const {jwt, user} = JSON.parse(evt.detail.xhr.response);
+            localStorage.setItem('jwt', jwt);
+            const returnUrl = document.referrer && document.referrer.includes(window.location.host)
+                ? document.referrer
+                : 'index.html';
+
+            window.location.href = returnUrl;
+        } else if (evt.detail.requestConfig.path === "https://prized-hero-09a7ef40d2.strapiapp.com/api/auth/local/register") {
+            document.getElementById('register-error').innerHTML = JSON.parse(evt.detail.xhr.responseText).error.message;
+        } else if (evt.detail.requestConfig.path === "https://prized-hero-09a7ef40d2.strapiapp.com/api/auth/local") {
+            document.getElementById('login-error').innerHTML = JSON.parse(evt.detail.xhr.responseText).error.message;
+        }
+    });
+
+    function logout() {
+        localStorage.removeItem('jwt');
+        window.location.reload();
+    }
+
+    function tohub() {
+        window.location.href = 'index.html'
+    }
+</script>
+</body>
+</html>
