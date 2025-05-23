@@ -110,7 +110,7 @@
     });
 
     document.body.addEventListener('htmx:afterRequest', function (evt) {
-        const forms = ['https://prized-hero-09a7ef40d2.strapiapp.com/local/register', 'https://prized-hero-09a7ef40d2.strapiapp.com/api/auth/local'];
+        const forms = ['https://prized-hero-09a7ef40d2.strapiapp.com/api/auth/local/register', 'https://prized-hero-09a7ef40d2.strapiapp.com/api/auth/local'];
 
         if (forms.includes(evt.detail.requestConfig.path) && evt.detail.successful) {
             const {jwt, user} = JSON.parse(evt.detail.xhr.response);
