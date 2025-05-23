@@ -7,30 +7,108 @@
   <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
   <script src="https://unpkg.com/mustache@latest"></script>
 </head>
+<header>
+  <div id="log_info">
+  <a href="./../auth.html">Войти или зарегистрироваться</a>
+</div>
+  <template id="login-template">
+    <div style="display: flex; flex-flow: row">
+      <h1>{{username}}</h1>
+      <button class="logout-btn" onclick="logout()">Выйти</button>
+    </div>
+  </template>
+
+
+  <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/users/me"
+       hx-target="#log_info"
+       hx-trigger="load"
+       hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+       hx-ext="client-side-templates"
+       mustache-template="login-template">
+  </div>
+</header>
 <body>
+
 <div id="content">
   <h1>Загрузка</h1>
 </div>
-<template id="person-template">
+<template id="presentation-template">
   <h1>{{name}}</h1>
   <p>{{description}}</p>
   <iframe src="https://docs.google.com/presentation/d/e/{{link}}/pubembed?start=false&loop=false&delayms=10000" frameborder="0" width="320" height="195" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
   <p>Выступающие: </p>
   {{#speakers}}
-  <a href="./speaker?id={{id}}">
+  <a href="./speaker.html?id={{id}}">
     <h3>{{name}}</h3>
   </a>
   {{/speakers}}
   {{^speakers}}<p>Спикеры этой лекции не предусмотрены</p>{{/speakers}}
+  <div class="comment-form">
+    <h2>Оставить комментарий</h2>
+    <form id="comment-form"
+          hx-post="https://prized-hero-09a7ef40d2.strapiapp.com/api/comments"
+          hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+    >
 
+      <input type="hidden" name="data[presentation_id]" id="presentation-id" value="{{id}}">
+
+      <div class="form-group">
+        <label for="text_comment">Ваш комментарий:</label>
+        <textarea id="text_comment" name="data[text_comment]" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="rate">Оценка (1-10):</label>
+        <select id="rate" name="data[rate]" class="rating-select" required>
+          <option value="">Выберите оценку</option>
+          <option value="1">1 - Плохо</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 - Средне</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10 - Отлично</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Ваше имя:</label>
+        <input type="text" id="name" name="data[name]">
+      </div>
+
+      <button type="submit">Отправить отзыв</button>
+    </form>
+  </div>
+  <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/comments?filters[presentation_id][$eq]={{id}}"
+       hx-target="#comments"
+       hx-trigger="load"
+       hx-ext="client-side-templates"
+       mustache-template="comments-template"
+  >
+
+  </div>
 </template>
 
-<div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
+<div id="comments"></div>
+
+<template id="comments-template">
+  {{#data}}
+  <h2>{{name}}</h2>
+  <p>{{text_comment}}</p>
+  {{/data}}
+</template>
+
+<div id="results" hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
      hx-target="#content"
      hx-ext="client-side-templates"
-     mustache-template="person-template">
+     mustache-template="presentation-template">
 </div>
+
+
 
 
 </body>

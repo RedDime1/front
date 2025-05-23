@@ -7,6 +7,7 @@
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
   <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
   <script src="https://unpkg.com/mustache@latest"></script>
+  <script src="./../logout.js"></script>
   <style>
     body {
       margin: 0;
@@ -42,6 +43,26 @@
     }
   </style>
 </head>
+<header>
+  <div id="log_info">
+    <a href="./../auth.html">Войти или зарегистрироваться</a>
+  </div>
+  <template id="login-template">
+    <div style="display: flex; flex-flow: row">
+      <h1>{{username}}</h1>
+      <button class="logout-btn" onclick="logout()">Выйти</button>
+    </div>
+  </template>
+
+
+  <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/users/me"
+       hx-target="#log_info"
+       hx-trigger="load"
+       hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+       hx-ext="client-side-templates"
+       mustache-template="login-template">
+  </div>
+</header>
 <body>
 
 <div id="content">
@@ -51,13 +72,13 @@
   {{#data}}
   <div class="card">
     <h2>{{name}}</h2>
-    <a href="./presentation?id={{id}}">
+    <a href="./presentation.html?id={{id}}">
       <img src={{preview}} width="400" class="card-image">
     </a>
     <p class="card-text">{{description}}</p>
     <p>Выступающие: </p>
     {{#speakers}}
-    <a href="./speaker?id={{id}}">
+    <a href="./speaker.html?id={{id}}">
       <h3>{{name}}</h3>
     </a>
     {{/speakers}}
@@ -66,7 +87,7 @@
   {{/data}}
 </template>
 
-<div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/presentations" hx-trigger="load" hx-swap="innerHTML"
+<div id="results" hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/presentations" hx-trigger="load" hx-swap="innerHTML"
      hx-target="#content"
      hx-ext="client-side-templates"
      mustache-array-template="person-template">

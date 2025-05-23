@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Курсы</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
+  <script src="https://unpkg.com/mustache@latest"></script>
   <style>
     body {
       margin: 0;
@@ -39,12 +42,33 @@
     }
   </style>
 </head>
+<header>
+  <div id="log_info">
+    <a href="/auth.html">Войти или зарегистрироваться</a>
+  </div>
+
+  <template id="login-template">
+    <div style="display: flex; flex-flow: row">
+      <h1>{{username}}</h1>
+      <button class="logout-btn" onclick="logout()">Выйти</button>
+    </div>
+  </template>
+
+
+  <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/users/me"
+       hx-target="#log_info"
+       hx-trigger="load"
+       hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+       hx-ext="client-side-templates"
+       mustache-template="login-template">
+  </div>
+</header>
 <body>
 <div class="box">
-  <a href="/course1/list">Курсы</a>
+  <a href="./course1/list.html">Курсы</a>
 </div>
 <div class="box">
-  <a href="/lectors/index">Лекторы</a>
+  <a href="./lectors/index.html">Лекторы</a>
 </div>
 <div class="box">
   <a href="#">ПАСКАЛЬ КХУРИ</a>

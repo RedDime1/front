@@ -7,6 +7,26 @@
   <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
   <script src="https://unpkg.com/mustache@latest"></script>
 </head>
+<header>
+  <div id="log_info">
+    <a href="./../auth.html">Войти или зарегистрироваться</a>
+  </div>
+  <template id="login-template">
+    <div style="display: flex; flex-flow: row">
+      <h1>{{username}}</h1>
+      <button class="logout-btn" onclick="logout()">Выйти</button>
+    </div>
+  </template>
+
+
+  <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/users/me"
+       hx-target="#log_info"
+       hx-trigger="load"
+       hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+       hx-ext="client-side-templates"
+       mustache-template="login-template">
+  </div>
+</header>
 <body>
 <div id="content">
   <h1>Загрузка</h1>
@@ -68,7 +88,7 @@
   </div>
 </template>
 
-<div id="results" hx-get="https://hopeful-compassion-dc535509c0.strapiapp.com/api/resume"  hx-trigger="load" hx-swap="innerHTML"
+<div id="results" hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/resume"  hx-trigger="load" hx-swap="innerHTML"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
      hx-target="#content"
      hx-ext="client-side-templates"
