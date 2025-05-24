@@ -83,6 +83,10 @@
     </a>
     {{/speakers}}
     {{^speakers}}<p>Спикеры этой лекции не предусмотрены</p>{{/speakers}}
+    <p>Тэги:
+    {{#tags}}
+      <a href="/tagSearch.html">#{{name}}</a>
+    {{/tags}}</p>
   </div>
   {{/data}}
 </template>
