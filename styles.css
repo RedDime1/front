@@ -2,127 +2,301 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-a {
     text-decoration: none;
-    display: flex;
 }
 
-.banner {
-    width: 100%;
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5%;
+}
+
+body {
     height: 100vh;
-    background: url("media/wall.jpg") repeat;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    padding-right: 10%;
+    background: linear-gradient(135deg, #01070c, #02121c);
+    background-size: 400% 400%;
+    font-family: Arial, sans-serif;
 }
-
-.table {
-    height: 100%;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 15%;
-}
-
-.logo{
-    width: 450px;
-    height: 310px;
-    background-image: url("media/pngegg.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.front{
-    width: 70%;
-    margin: 5px;
-    font-family: 'Neon Spark';
-    font-weight: bold;
-    font-size: 46px;
-    color: #ffffff;
-    -webkit-text-stroke-color: #cb00ff;
-    -webkit-text-stroke-width: 0.3px;
-    letter-spacing: 10px;
-    text-transform: uppercase;
-    text-shadow: 0 0 6px rgb(255, 255, 255), 0 0 30px rgba(148, 106, 159, 0.92), 0 0 12px rgba(185, 81, 216, 0.92), 0 0 21px rgba(231, 146, 255, 0.92), 0 0 34px rgba(191, 226, 255, 0.78), 0 0 54px rgba(191, 226, 255, 0.92);
-}
-
-.school_frame {
-    height: 90px;
-    width: 70%;
-    border: solid 5px #ec9dff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow:
-            0 0 6px rgb(255, 255, 255), 0 0 30px rgba(148, 106, 159, 0.23), 0 0 12px rgba(185, 81, 216, 0.23), 0 0 21px rgba(231, 146, 255, 0.23), 0 0 34px rgba(191, 226, 255, 0.18), 0 0 54px rgba(191, 226, 255, 0.23),
-            inset 0 0 6px rgb(255, 255, 255), 0 0 30px rgba(148, 106, 159, 0.46), 0 0 12px rgba(185, 81, 216, 0.46), 0 0 21px rgba(231, 146, 255, 0.46), 0 0 34px rgba(191, 226, 255, 0.39), 0 0 54px rgba(191, 226, 255, 0.46);
-}
-
-.school {
-    height: 100%;
-    width: 100%;
-    border: solid 5px cyan;
-    border-radius: 10px;
-    color: #ffffff;
-    -webkit-text-stroke-color: #FFFF00FF;
-    -webkit-text-stroke-width: 0.1px;
-    font-size: 51px;
-    line-height: 51px;
-    letter-spacing: 15px;
-    overflow: hidden;
-    padding-left: 13px;
-    font-family: 'Neon Goodshine';
-    box-shadow:
-            0 0 2px rgb(255, 255, 255), 0 0 10px rgba(109, 168, 175, 0.23), 0 0 4px rgba(93, 238, 255, 0.23), 0 0 7px rgba(0, 223, 250, 0.23), 0 0 11px rgba(191, 226, 255, 0.18), 0 0 18px rgba(191, 226, 255, 0.23),
-            inset 0 0 2px rgb(255, 255, 255), 0 0 10px rgba(109, 168, 175, 0.46), 0 0 12px rgba(0, 223, 250, 0.46), 0 0 7px rgba(0, 223, 250, 0.46), 0 0 11px rgba(191, 226, 255, 0.39), 0 0 18px rgba(191, 226, 255, 0.46);
-    text-shadow: 0 0 6px rgb(255, 255, 255), 0 0 30px rgba(168, 153, 96, 0.92), 0 0 12px rgba(227, 215, 79, 0.92), 0 0 21px rgba(253, 230, 0, 0.92), 0 0 34px rgba(191, 226, 255, 0.78), 0 0 54px rgba(191, 226, 255, 0.92);
-
-}
-
-.yandex {
-    font-family: 'Rocket';
-    color: #ffffff;
-    -webkit-text-stroke-color: #d2ff00;
-    -webkit-text-stroke-width: 0.4px;
-    font-size: 150%;
-    text-shadow: 0 0 6px rgb(255, 255, 255), 0 0 30px rgba(168, 145, 96, 0.92), 0 0 12px rgba(227, 215, 79, 0.92), 0 0 21px rgba(253, 219, 0, 0.92), 0 0 34px rgba(191, 226, 255, 0.78), 0 0 54px rgba(191, 226, 255, 0.92);
-
-}
-
 
 @font-face {
     font-family: 'Neon Spark';
     src: url('fonts/Neon Spark.otf');
 }
 
-@font-face {
-    font-family: 'Rocket';
-    src: url('fonts/Rocket Clouds.ttf');
+.elegant-border-aqua {
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 255, 0.2); /* едва заметная граница */
+    box-shadow:
+            0 0 6px rgba(0, 255, 255, 0.15),
+            0 0 12px rgba(0, 255, 255, 0.08);
 }
 
-@font-face {
-    font-family: 'Neon Goodshine';
-    src: url('fonts/Neon Goodshine.otf');
+.elegant-border-purple {
+    border-radius: 20px;
+    border: 1px solid rgba(170, 0, 255, 0.2); /* едва заметная граница */
+    box-shadow:
+            0 0 6px rgba(170, 0, 255, 0.15),
+            0 0 12px rgba(170, 0, 255, 0.08);
 }
-.door {
-    height: 90%;
-    width: 35%;
-    background-color: saddlebrown;
-    color: white;
-    overflow: auto;
-    text-align: center;
-    font-size: 60px;
+
+.elegant-border-blue {
+    border-radius: 20px;
+    border: 1px solid rgba(0, 51, 255, 0.2); /* едва заметная граница */
+    box-shadow:
+            0 0 6px rgba(0, 51, 255, 0.15),
+            0 0 12px rgba(0, 51, 255, 0.08);
+}
+
+.elegant-border-pink {
+    border-radius: 20px;
+    border: 1px solid rgba(183, 113, 205, 0.2); /* едва заметная граница */
+    box-shadow:
+            0 0 6px rgba(144, 110, 156, 0.15),
+            0 0 12px rgba(144, 110, 156, 0.08);
+}
+
+
+.menu-button {
+    z-index: 1001;
+    background: transparent;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 255, 255, 0.2); /* едва заметная граница */
+    padding: 10px 15px;
+    font-size: 18px;
+    color: #0ff;
+    font-family: 'Neon Spark', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-button.active {
+    background-color: rgba(0, 255, 255, 0.1);
+    color: #fff;
+    box-shadow:
+            0 0 6px rgba(0, 255, 255, 0.3),
+            0 0 12px rgba(0, 255, 255, 0.2);
+    transform: rotate(90deg); /* опционально — для динамики */
+    transition: all 0.3s ease;
+}
+
+.menu-button.inactive {
+    transform: rotate(-90deg);
+}
+
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -21%;
+    width: 20%;
+    height: 100%;
+    background-color: #011627;
+    transition: right 0.5s ease;
+    z-index: 1000;
+    padding: 2.5% 1.25%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0;
+    justify-content: space-between;
+}
+
+.menu-list {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10%;
+    gap: 5%;
+}
+
+.menu-item {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+.assistant-menu {
+    height:60%;
+    width: 100%;
     align-self: flex-end;
+}
+
+
+
+.side-menu a {
+    display: block;
+    font-family: 'Neon Spark', sans-serif;
+    color: white;
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.logo {
+
+}
+
+.courses{
+    width: 100%;
+}
+
+.course-card {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding: 1%;
+}
+
+.general-info {
+    width: 100%;
+    aspect-ratio: 16 / 16;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 0.5%;
+    padding: 1%;
+
+}
+
+.general-info-card{
+    width: 48.25%;
+    aspect-ratio: 15 / 25;
+    display: flex;
+    flex-direction: column;
+    padding: 5% 3% 3%;
     align-items: center;
 }
+.general-info-text {
+    width: 48.25%;
+    aspect-ratio: 15 / 25;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+}
+
+.general-info-card img {
+    max-width: 80%;
+    max-height: 30%;
+    margin-bottom: 5%;
+}
+
+.general-info h1{
+    font-size: 180%;
+    text-align: center;
+
+}
+
+.general-info-card p{
+    text-align: start;
+    color: gray;
+    font-size: 100%;
+
+}
+
+.general-info-card-bottom{
+    width: 100%;
+    margin-top: auto;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    justify-content: center;
+}
+
+.general-info-card-bottom button{
+    width: 100%;
+    margin-top: 5%;
+    align-self: center;
+}
+
+.cyan-text {
+    color: #0ff;
+}
+
+.side-menu a:hover {
+    text-decoration: underline;
+}
+
+.course-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5%;
+    margin-bottom: 2%;
+    color: white;
+    padding: 2%;
+}
+
+.teacher-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    aspect-ratio: 6 / 1;
+    gap: 2.5%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2%;
+}
+
+.teacher-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    overflow: hidden;
+    padding: 5%;
+    margin-bottom: 2%;
+}
+
+.teacher-card img {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    max-width: 60px;
+    max-height: 60px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.teacher-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 3%;
+    padding: 5%;
+}
+
+.teacher-info h1{
+    color: #80efff;
+    font-size: 90%;
+}
+.teacher-info p{
+    font-size: 80%;
+    color: #627c79;
+}
+
+.tags{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    gap: 5%;
+    aspect-ratio: 15 / 1;
+    padding: 0 5%;
+    color: #bd96e1;
+    margin-bottom: 2%;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1% 5%;
+}
+
