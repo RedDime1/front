@@ -20,7 +20,7 @@
   </template>
 
 
-  <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/users/me"
+  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"
        hx-target="#log_info"
        hx-trigger="load"
        hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
@@ -51,7 +51,7 @@
   <div class="comment-form">
     <h2>Оставить комментарий</h2>
     <form id="comment-form"
-          hx-post="https://prized-hero-09a7ef40d2.strapiapp.com/api/comments"
+          hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments"
           hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
           hx-target="#status"
     >
@@ -80,7 +80,7 @@
     <div id="status">
     </div>
   </div>
-  <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/comments?filters[presentation_id][$eq]={{id}}"
+  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments?filters[presentation_id][$eq]={{id}}"
        hx-target="#comments"
        hx-trigger="load"
        hx-ext="client-side-templates"
@@ -101,7 +101,7 @@
   {{/data}}
 </template>
 
-<div id="results" hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
+<div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
      hx-target="#content"
      hx-ext="client-side-templates"
@@ -112,7 +112,7 @@
   document.body.addEventListener('htmx:afterRequest', function (evt) {
     if (evt.detail.elt.getAttribute('hx-post') && !evt.detail.successful) {
       document.getElementById('status').innerHTML = JSON.parse(evt.detail.xhr.responseText).error.message;
-    } else if (evt.detail.requestConfig.path === "https://prized-hero-09a7ef40d2.strapiapp.com/api/presentation") {
+    } else if (evt.detail.requestConfig.path === "https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation") {
       const jwt = localStorage.getItem('jwt');
       const commentForm = document.getElementById('comment-form');
       if (!jwt) {

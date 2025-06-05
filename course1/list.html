@@ -55,7 +55,7 @@
   </template>
 
 
-  <div hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/users/me"
+  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"
        hx-target="#log_info"
        hx-trigger="load"
        hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
@@ -91,7 +91,7 @@
   {{/data}}
 </template>
 
-<div id="results" hx-get="https://prized-hero-09a7ef40d2.strapiapp.com/api/presentations" hx-trigger="load" hx-swap="innerHTML"
+<div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentations" hx-trigger="load" hx-swap="innerHTML"
      hx-target="#content"
      hx-ext="client-side-templates"
      mustache-array-template="person-template">
