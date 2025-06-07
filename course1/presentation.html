@@ -210,12 +210,16 @@
     } else if (evt.detail.requestConfig.elt.getAttribute('hx-post')) {
       const id_com = evt.detail.requestConfig.parameters.comment;
       const btn = document.getElementById('reply-btn-'+id_com);
-      btn.setAttribute(
-              'hx-get',
-              `https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/${btn.dataset.commentId}?page=1`
-      );
-      htmx.process(btn);
-      htmx.trigger(btn, 'click');
+      if (btn) {
+        btn.setAttribute(
+                'hx-get',
+                `https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/${btn.dataset.commentId}?page=1`
+        );
+        htmx.process(btn);
+        htmx.trigger(btn, 'click');
+      } else {
+        htmx.trigger("#data-block", "updateComments")
+      }
     } else if (evt.detail.requestConfig.path === "https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation") {
         const jwt = localStorage.getItem('jwt');
         const commentForm = document.getElementById('comment-form');
