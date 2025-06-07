@@ -7,6 +7,39 @@
   <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
   <script src="https://unpkg.com/mustache@latest"></script>
   <script src="/logout.js"></script>
+
+  <style>
+    .comment {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .replies-container {
+      margin-left: 30px;  /* Отступ для вложенности */
+      border-left: 2px solid #ccc;
+      padding-left: 10px;
+    }
+
+    .reply-btn, .show-replies-btn {
+      background: none;
+      border: none;
+      color: blue;
+      cursor: pointer;
+      padding: 5px 0;
+    }
+
+    .show-replies-btn {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .comments_form {
+      display: flex;
+      flex-direction: row;
+    }
+  </style>
 </head>
 <header>
   <div id="log_info">
@@ -63,43 +96,105 @@
         <textarea id="text_comment" name="text_comment" required></textarea>
       </div>
 
-      <div class="form-group">
-        <label for="rate">Оценка (1-5):</label>
-        <select id="rate" name="rate" class="rating-select" required>
-          <option value="">Выберите оценку</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-
-      <button type="submit">Отправить отзыв</button>
+      <button type="submit">Отправить комментарий</button>
     </form>
     <div id="status">
     </div>
   </div>
-  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments?filters[presentation_id][$eq]={{id}}"
+  <div id="data-block" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments/presentation/{{id}}"
        hx-target="#comments"
-       hx-trigger="load"
+       hx-trigger="load, updateComments from:body"
        hx-ext="client-side-templates"
-       mustache-template="comments-template"
-  >
+       mustache-template="comments-template"></div>
+  </div>
 
+
+</template>
+
+
+
+<div class="comments_form">
+  <div id="comments">
+
+  </div>
+  <div id="global-reply-form"></div>
+</div>
+
+
+
+<template id="comments-template">
+  <div class="comments">
+    {{#commentsWithDate}}
+    <div class="comment" id="comment-{{id}}">
+      <div class="comment-author">{{name}}</div>
+      <div class="date">{{date}}</div>
+      <div class="comment-text">{{text_comment}}</div>
+      <button hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/reply-form?comment={{id}}&author={{name}}"
+              hx-target="#global-reply-form">
+        Ответить
+      </button>
+      <div class="reply-form-container"></div>
+      {{#replies_count}}
+      <div class="replies">
+        <button  id="reply-btn-{{id}}" class="toggle-replies"
+                hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/{{id}}?page=1"
+                hx-target="next .replies-container"
+                hx-ext="client-side-templates"
+                mustache-template="reply-template"
+                data-comment-id="{{id}}"
+                data-replies-count="{{replies_count}}">
+          Показать ответы ({{replies_count}})
+        </button>
+        <div class="replies-container"></div>
+      </div>
+      {{/replies_count}}
+      {{^replies_count}}{{/replies_count}}
+    </div>
+    {{/commentsWithDate}}
+    {{#meta}}
+    <div style="height: 1px" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments/presentation/{{pr_id}}?page={{next_page}}"
+         hx-trigger="revealed"
+         hx-target="next .container"
+         hx-ext="client-side-templates"
+         mustache-template="comments-template">
+    </div>
+    <div class="container"></div>
+    {{/meta}}
+    {{^meta}}{{/meta}}
   </div>
 </template>
 
-<div id="comments"></div>
 
-<template id="comments-template">
+<template id="reply-template">
   {{#data}}
-  <h2>Имя комментатора: {{name}}</h2>
-  <p>Текст: {{text_comment}}</p>
-  <p>Оценка: {{rate}}/5</p>
-  <p>Дата: {{date}}</p>
+  <div class="reply">
+    <div class="comment-author">{{name}}</div>
+    <div class="date">{{date}}</div>
+    <p><b>{{name_adr}}</b>, {{text}}</p>
+    <button hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/reply-form?comment={{com_id}}&author={{name}}"
+            hx-target="#global-reply-form">
+      Ответить
+    </button>
+  </div>
   {{/data}}
+  {{#meta}}
+  <div class="replies-deep-container">
+  <button hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/{{com_id}}?page={{next_page}}"
+       hx-target="closest .replies-deep-container"
+       hx-ext="client-side-templates"
+       mustache-template="reply-template">
+    Загрузить ещё ответы
+  </button>
+  </div>
+  {{/meta}}
+  {{^meta}}{{/meta}}
 </template>
+
+<template id="empty-template">
+</template>
+
+
+
 
 <div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
@@ -110,14 +205,40 @@
 
 <script>
   document.body.addEventListener('htmx:afterRequest', function (evt) {
-    if (evt.detail.elt.getAttribute('hx-post') && !evt.detail.successful) {
-      document.getElementById('status').innerHTML = JSON.parse(evt.detail.xhr.responseText).error.message;
+    if (evt.detail.elt.getAttribute('hx-post')) {
+      htmx.trigger("#data-block", "updateComments")
+    } else if (evt.detail.requestConfig.elt.getAttribute('hx-post')) {
+      const id_com = evt.detail.requestConfig.parameters.comment;
+      const btn = document.getElementById('reply-btn-'+id_com);
+      btn.setAttribute(
+              'hx-get',
+              `https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/${btn.dataset.commentId}?page=1`
+      );
+      htmx.process(btn);
+      htmx.trigger(btn, 'click');
     } else if (evt.detail.requestConfig.path === "https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation") {
-      const jwt = localStorage.getItem('jwt');
-      const commentForm = document.getElementById('comment-form');
-      if (!jwt) {
-        commentForm.style.display = 'none';
+        const jwt = localStorage.getItem('jwt');
+        const commentForm = document.getElementById('comment-form');
+        if (!jwt) {
+          commentForm.style.display = 'none';
+        }
+    }
+  });
+
+  document.body.addEventListener('htmx:afterRequest', function(e) {
+    if (e.detail.requestConfig.path.includes('page=1')) {
+      console.log(e.detail)
+      const button = e.detail.elt;
+      const container = button.nextElementSibling;
+      console.log(container.innerHTML.trim())
+      if (container.innerHTML.trim() !== '') {
+        button.textContent = 'Скрыть ответы';
+        button.setAttribute('hx-get', `https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/${button.dataset.commentId}?hide=true&page=1`);
+      } else {
+        button.textContent = `Показать ответы (${button.dataset.repliesCount})`;
+        button.setAttribute('hx-get', `https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/${button.dataset.commentId}?page=1`);
       }
+      htmx.process(button);
     }
   });
 </script>
