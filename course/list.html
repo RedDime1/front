@@ -69,9 +69,18 @@
   <h1>Загрузка</h1>
 </div>
 <template id="person-template">
+  {{#progressInfo}}
+  <div><p>Лень писать прогрессбар, число с сервера: {{progress}}</p></div>
+  {{/progressInfo}}
+  {{^progressInfo}}
+  <p>Хочешь видеть свой прогресс? Так авторизуйся!</p>
+  {{/progressInfo}}
   {{#data}}
   <div class="card">
     <h2>{{name}}</h2>
+    {{#completed}}
+    <p><b style="color: green">Пройдено</b></p>
+    {{/completed}}
     <a href="./presentation.html?id={{id}}">
       <img src={{preview}} width="400" class="card-image">
     </a>
@@ -91,10 +100,21 @@
   {{/data}}
 </template>
 
-<div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentations" hx-trigger="load" hx-swap="innerHTML"
+<div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentations"
+     hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
+     hx-headers='js:{"Authorization": gg()}'
+     hx-trigger="load" hx-swap="innerHTML"
      hx-target="#content"
      hx-ext="client-side-templates"
-     mustache-array-template="person-template">
+     mustache-template="person-template">
 </div>
+
+<script>
+  function gg() {
+    if (localStorage.getItem("jwt"))
+      return "Bearer " + localStorage.getItem("jwt")
+    else return ""
+  }
+</script>
 </body>
 </html>

@@ -65,14 +65,23 @@
   </div>
 </header>
 <body>
-<div class="box">
-  <a href="./course1/list.html">Курсы</a>
+
+
+<div id="content">
+  <h1>Загрузка</h1>
 </div>
-<div class="box">
-  <a href="./lectors/index.html">Лекторы</a>
-</div>
-<div class="box">
-  <a href="#">ПАСКАЛЬ КХУРИ</a>
+<template id="courses-template">
+  {{#data}}
+  <div class="box">
+    <a href="./course/list.html?id={{id}}">{{title}}</a>
+  </div>
+  {{/data}}
+</template>
+
+<div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/courses" hx-trigger="load" hx-swap="innerHTML"
+     hx-target="#content"
+     hx-ext="client-side-templates"
+     mustache-template="courses-template">
 </div>
 </body>
 </html>

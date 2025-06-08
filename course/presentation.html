@@ -39,6 +39,64 @@
       display: flex;
       flex-direction: row;
     }
+
+    .test-form {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .question {
+      margin-bottom: 25px;
+      padding: 15px;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .answer-option {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .answer-option:hover {
+      background: #f0f0f0;
+    }
+
+    .answer-option input {
+      margin-right: 10px;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .submit-btn:hover {
+      background: #45a049;
+    }
   </style>
 </head>
 <header>
@@ -80,9 +138,13 @@
   <p>Тэги:
     {{#tags}}
     <a href="/tagSearch.html">#{{name}}</a>
-    {{/tags}}</p>
+    {{/tags}}
+  </p>
+
+  <div id="test">
+  </div>
+
   <div class="comment-form">
-    <h2>Оставить комментарий</h2>
     <form id="comment-form"
           hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments"
           hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
@@ -101,15 +163,24 @@
     <div id="status">
     </div>
   </div>
+
+  <div id="test-block" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/test"
+       hx-target="#test"
+       hx-trigger="load, loadTest from:body"
+       hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
+       hx-headers='js:{"Authorization": gg()}'
+       hx-ext="client-side-templates"
+       mustache-template="test-template"></div>
+
   <div id="data-block" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments/presentation/{{id}}"
        hx-target="#comments"
        hx-trigger="load, updateComments from:body"
        hx-ext="client-side-templates"
        mustache-template="comments-template"></div>
   </div>
-
-
 </template>
+
+
 
 
 
@@ -121,6 +192,56 @@
 </div>
 
 
+<template id="test-template">
+  {{^wrap}}
+  Чтобы проходить тест и отмечать свой прогресс авторизуйся.
+  {{/wrap}}
+  {{#wrap}}
+    {{^data}}
+      Тест пройден!
+    {{/data}}
+    {{#data}}
+      <form hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/test"
+            hx-target="#test"
+            class="test-form"
+            hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
+            hx-headers='js:{"Authorization": gg()}'
+            hx-ext="client-side-templates"
+            mustache-template="result-template">
+        <input type="hidden" name="testId" value="{{id}}">
+        <h2>{{title}}</h2>
+        {{#questions}}
+        <div class="question" data-question-id="{{id_q}}">
+          <h3>{{text_q}}</h3>
+          <div class="answers">
+            {{#answers}}
+            <label class="answer-option">
+              <input type="radio"
+                     name="answers[{{id_q}}]"
+                     value="{{id}}"
+                     required>
+              <span>{{text}}</span>
+            </label>
+            {{/answers}}
+          </div>
+        </div>
+        {{/questions}}
+        <button type="submit" class="submit-btn">Отправить тест</button>
+      </form>
+    {{/data}}
+  {{/wrap}}
+</template>
+
+<template id="result-template">
+  {{^success}}
+    <p style="color: red">Есть ошибки. Надо повторить материал.</p>
+    <button onclick="eventTest()">Попробовать ещё раз</button>
+  {{/success}}
+  {{#success}}
+    <p style="color: green">Ура, тест пройден. Урок отмечен, как выполненный!</p>
+  {{/success}}
+
+</template>
 
 <template id="comments-template">
   <div class="comments">
@@ -209,7 +330,7 @@
       htmx.trigger("#data-block", "updateComments")
     } else if (evt.detail.requestConfig.elt.getAttribute('hx-post')) {
       const id_com = evt.detail.requestConfig.parameters.comment;
-      const btn = document.getElementById('reply-btn-'+id_com);
+      const btn = document.getElementById('reply-btn-' + id_com);
       if (btn) {
         btn.setAttribute(
                 'hx-get',
@@ -221,15 +342,15 @@
         htmx.trigger("#data-block", "updateComments")
       }
     } else if (evt.detail.requestConfig.path === "https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation") {
-        const jwt = localStorage.getItem('jwt');
-        const commentForm = document.getElementById('comment-form');
-        if (!jwt) {
-          commentForm.style.display = 'none';
-        }
+      const jwt = localStorage.getItem('jwt');
+      const commentForm = document.getElementById('comment-form');
+      if (!jwt) {
+        commentForm.style.display = 'none';
+      }
     }
   });
 
-  document.body.addEventListener('htmx:afterRequest', function(e) {
+  document.body.addEventListener('htmx:afterRequest', function (e) {
     if (e.detail.requestConfig.path.includes('page=1')) {
       console.log(e.detail)
       const button = e.detail.elt;
@@ -245,9 +366,18 @@
       htmx.process(button);
     }
   });
+
+  function gg() {
+    if (localStorage.getItem("jwt"))
+    return "Bearer " + localStorage.getItem("jwt")
+    else return ""
+  }
+
+  function eventTest() {
+    htmx.trigger("#test-block", "loadTest")
+  }
+
 </script>
-
-
 
 
 </body>
