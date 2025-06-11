@@ -71,7 +71,7 @@
     </template>
 
 
-    <div hx-get="http://localhost:1337/api/users/me"
+    <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"
          hx-target="#log_info"
          hx-trigger="load"
          hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
@@ -86,7 +86,7 @@
 
 <template id="tags-list-template">
 
-    <form id="tags-form" hx-get="http://localhost:1337/api/presentations/tags" hx-target="#search-result"
+    <form id="tags-form" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentations/tags" hx-target="#search-result"
           hx-trigger="load"
           hx-ext="client-side-templates"
           mustache-array-template="presentations-template">
@@ -128,7 +128,7 @@
 
 
 <div id="tags-load"
-     hx-get="http://localhost:1337/api/tags"
+     hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/tags"
      hx-target="#tags-search"
      hx-trigger="load"
      hx-ext="client-side-templates"

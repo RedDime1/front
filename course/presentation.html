@@ -112,7 +112,7 @@
   </template>
 
 
-  <div hx-get="http://localhost:1337/api/users/me"
+  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"
        hx-target="#log_info"
        hx-trigger="load"
        hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
@@ -148,7 +148,7 @@
 
   <div class="comment-form">
     <form id="comment-form"
-          hx-post="http://localhost:1337/api/comments"
+          hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments"
           hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
           hx-target="#status"
     >
@@ -166,7 +166,7 @@
     </div>
   </div>
 
-  <div id="test-block" hx-get="http://localhost:1337/api/test"
+  <div id="test-block" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/test"
        hx-target="#test"
        hx-trigger="load, loadTest from:body"
        hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
@@ -174,14 +174,14 @@
        hx-ext="client-side-templates"
        mustache-template="test-template"></div>
 
-  <div id="data-block" hx-get="http://localhost:1337/api/comments/presentation/{{id}}"
+  <div id="data-block" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments/presentation/{{id}}"
        hx-target="#comments"
        hx-trigger="load, updateComments from:body"
        hx-ext="client-side-templates"
        mustache-template="comments-template"></div>
   </div>
 
-  <div id="fav-block" hx-get="http://localhost:1337/api/favourite"
+  <div id="fav-block" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"
        hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
        hx-headers='js:{"Authorization": authHeader()}'
        hx-target="#fav-container"
@@ -212,7 +212,7 @@
       Тест пройден!
     {{/data}}
     {{#data}}
-      <form hx-post="http://localhost:1337/api/test"
+      <form hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/test"
             hx-target="#test"
             class="test-form"
             hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
@@ -256,24 +256,24 @@
 
 <template id="fav-template">
   {{^data}}
-<!--  <form hx-post="http://localhost:1337/api/favourite"-->
+<!--  <form hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"-->
 <!--        hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'-->
 <!--        hx-headers='js:{"Authorization": authHeader()}'>-->
 <!--    <button type="submit" class="submit-btn">Добавить в закладки</button>-->
 <!--  </form>-->
 
-  <button class="fav-btn" hx-post="http://localhost:1337/api/favourite"
+  <button class="fav-btn" hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"
           hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
           hx-headers='js:{"Authorization": authHeader()}'>Добавить в закладки</button>
   {{/data}}
   {{#data}}
 
-<!--  <form hx-post="http://localhost:1337/api/favourite"-->
+<!--  <form hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"-->
 <!--        hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'-->
 <!--        hx-headers='js:{"Authorization": authHeader()}'>-->
 <!--    <button type="submit" class="submit-btn">Убрать из закладок</button>-->
 <!--  </form>-->
-  <button class="fav-btn" hx-post="http://localhost:1337/api/favourite"
+  <button class="fav-btn" hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"
           hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
           hx-headers='js:{"Authorization": authHeader()}'>Убрать из закладок</button>
 
@@ -287,7 +287,7 @@
       <div class="comment-author">{{name}}</div>
       <div class="date">{{date}}</div>
       <div class="comment-text">{{text_comment}}</div>
-      <button hx-get="http://localhost:1337/api/reply-form?comment={{id}}&author={{name}}"
+      <button hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/reply-form?comment={{id}}&author={{name}}"
               hx-target="#global-reply-form">
         Ответить
       </button>
@@ -295,7 +295,7 @@
       {{#replies_count}}
       <div class="replies">
         <button  id="reply-btn-{{id}}" class="toggle-replies"
-                hx-get="http://localhost:1337/api/replies/{{id}}?page=1"
+                hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/{{id}}?page=1"
                 hx-target="next .replies-container"
                 hx-ext="client-side-templates"
                 mustache-template="reply-template"
@@ -310,7 +310,7 @@
     </div>
     {{/commentsWithDate}}
     {{#meta}}
-    <div style="height: 1px" hx-get="http://localhost:1337/api/comments/presentation/{{pr_id}}?page={{next_page}}"
+    <div style="height: 1px" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments/presentation/{{pr_id}}?page={{next_page}}"
          hx-trigger="revealed"
          hx-target="next .container"
          hx-ext="client-side-templates"
@@ -329,7 +329,7 @@
     <div class="comment-author">{{name}}</div>
     <div class="date">{{date}}</div>
     <p><b>{{name_adr}}</b>, {{text}}</p>
-    <button hx-get="http://localhost:1337/api/reply-form?comment={{com_id}}&author={{name}}"
+    <button hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/reply-form?comment={{com_id}}&author={{name}}"
             hx-target="#global-reply-form">
       Ответить
     </button>
@@ -337,7 +337,7 @@
   {{/data}}
   {{#meta}}
   <div class="replies-deep-container">
-  <button hx-get="http://localhost:1337/api/replies/{{com_id}}?page={{next_page}}"
+  <button hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/{{com_id}}?page={{next_page}}"
        hx-target="closest .replies-deep-container"
        hx-ext="client-side-templates"
        mustache-template="reply-template">
@@ -354,7 +354,7 @@
 
 
 
-<div id="results" hx-get="http://localhost:1337/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
+<div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
      hx-target="#content"
      hx-ext="client-side-templates"
@@ -370,10 +370,10 @@
       console.log(container.innerHTML.trim())
       if (container.innerHTML.trim() !== '') {
         button.textContent = 'Скрыть ответы';
-        button.setAttribute('hx-get', `http://localhost:1337/api/replies/${button.dataset.commentId}?hide=true&page=1`);
+        button.setAttribute('hx-get', `https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/${button.dataset.commentId}?hide=true&page=1`);
       } else {
         button.textContent = `Показать ответы (${button.dataset.repliesCount})`;
-        button.setAttribute('hx-get', `http://localhost:1337/api/replies/${button.dataset.commentId}?page=1`);
+        button.setAttribute('hx-get', `https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/${button.dataset.commentId}?page=1`);
       }
       htmx.process(button);
     } else if (evt.detail.elt.getAttribute('hx-post')) {
@@ -388,14 +388,14 @@
       if (btn) {
         btn.setAttribute(
                 'hx-get',
-                `http://localhost:1337/api/replies/${btn.dataset.commentId}?page=1`
+                `https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/${btn.dataset.commentId}?page=1`
         );
         htmx.process(btn);
         htmx.trigger(btn, 'click');
       } else {
         htmx.trigger("#data-block", "updateComments")
       }
-    } else if (evt.detail.requestConfig.path === "http://localhost:1337/api/presentation") {
+    } else if (evt.detail.requestConfig.path === "https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation") {
       const jwt = localStorage.getItem('jwt');
       const commentForm = document.getElementById('comment-form');
       if (!jwt) {

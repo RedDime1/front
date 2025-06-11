@@ -71,7 +71,7 @@
   </template>
 
 
-  <div hx-get="http://localhost:1337/api/users/me"
+  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"
        hx-target="#log_info"
        hx-trigger="load"
        hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
@@ -119,7 +119,7 @@
   {{/data}}
 </template>
 
-<div id="results" hx-get="http://localhost:1337/api/presentations"
+<div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentations"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
      hx-headers='js:{"Authorization": gg()}'
      hx-trigger="load" hx-swap="innerHTML"
