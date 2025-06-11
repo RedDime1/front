@@ -1,24 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поиск по тэгам</title>
+    <title>Title</title>
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
     <script src="/logout.js"></script>
 </head>
+
 <style>
-    #tags-search {
-        font-family: 'Arial', sans-serif;
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
     body {
         margin: 0;
         padding: 20px;
@@ -56,16 +47,16 @@
         color: blue;
     }
 </style>
+
+
 <body>
 <header>
     <div id="log_info">
-        <a href="/auth.html">Войти или зарегистрироваться</a>
+        <a href="./../auth.html">Войти или зарегистрироваться</a>
     </div>
-
     <template id="login-template">
         <div style="display: flex; flex-flow: row">
             <h1>{{username}}</h1>
-            <a href="/favourite.html">Закладки</a>
             <button class="logout-btn" onclick="logout()">Выйти</button>
         </div>
     </template>
@@ -80,30 +71,10 @@
     </div>
 </header>
 
-<div id="tags-search"></div>
-<div id="search-result"></div>
-
-
-<template id="tags-list-template">
-
-    <form id="tags-form" hx-get="http://localhost:1337/api/presentations/tags" hx-target="#search-result"
-          hx-trigger="load"
-          hx-ext="client-side-templates"
-          mustache-array-template="presentations-template">
-        {{#data}}
-        <label class="tag-item">
-            <input type="checkbox" name="tags" value="{{name}}">
-            {{name}}
-        </label>
-
-        {{/data}}
-        <button type="submit"> Найти</button>
-    </form>
-
-</template>
+<div id="favourite-result"></div>
 
 <template id="presentations-template">
-    {{#data}}
+    {{#presentations}}
     <div class="card">
         <h2>{{name}}</h2>
         <a href="./presentation.html?id={{id}}">
@@ -123,19 +94,24 @@
             {{/tags}}
         </p>
     </div>
-    {{/data}}
+    {{/presentations}}
+    {{^presentations}}
+    <h2>Вы ещё не добавили ни одной закладки.</h2>
+    <h2> Здесь появится уроки,которые вы добавите в закладки.</h2>
+    {{/presentations}}
 </template>
 
 
-<div id="tags-load"
-     hx-get="http://localhost:1337/api/tags"
-     hx-target="#tags-search"
+<div id="favourite-load"
+     hx-get="http://localhost:1337/api/presentations/favourites"
+     hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+     hx-target="#favourite-result"
      hx-trigger="load"
      hx-ext="client-side-templates"
-     mustache-template="tags-list-template">
+     mustache-template="presentations-template">
 </div>
 
-<script>
-</script>
+
+
 </body>
 </html>

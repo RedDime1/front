@@ -15,12 +15,13 @@
   <template id="login-template">
     <div style="display: flex; flex-flow: row">
       <h1>{{username}}</h1>
+      <a href="/favourite.html">Закладки</a>
       <button class="logout-btn" onclick="logout()">Выйти</button>
     </div>
   </template>
 
 
-  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"
+  <div hx-get="http://localhost:1337/api/users/me"
        hx-target="#log_info"
        hx-trigger="load"
        hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
@@ -89,7 +90,7 @@
   </div>
 </template>
 
-<div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/resume"  hx-trigger="load" hx-swap="innerHTML"
+<div id="results" hx-get="http://localhost:1337/api/resume"  hx-trigger="load" hx-swap="innerHTML"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
      hx-target="#content"
      hx-ext="client-side-templates"
