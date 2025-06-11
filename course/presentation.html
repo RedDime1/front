@@ -256,24 +256,14 @@
 
 <template id="fav-template">
   {{^data}}
-<!--  <form hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"-->
-<!--        hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'-->
-<!--        hx-headers='js:{"Authorization": authHeader()}'>-->
-<!--    <button type="submit" class="submit-btn">Добавить в закладки</button>-->
-<!--  </form>-->
-
   <button class="fav-btn" hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"
+          hx-swap="none"
           hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
           hx-headers='js:{"Authorization": authHeader()}'>Добавить в закладки</button>
   {{/data}}
   {{#data}}
-
-<!--  <form hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"-->
-<!--        hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'-->
-<!--        hx-headers='js:{"Authorization": authHeader()}'>-->
-<!--    <button type="submit" class="submit-btn">Убрать из закладок</button>-->
-<!--  </form>-->
   <button class="fav-btn" hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/favourite"
+          hx-swap="none"
           hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
           hx-headers='js:{"Authorization": authHeader()}'>Убрать из закладок</button>
 
