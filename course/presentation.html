@@ -126,6 +126,7 @@
   <h1>Загрузка</h1>
 </div>
 <template id="presentation-template">
+  {{#data}}
   <h1>{{name}}</h1>
   <div id="fav-container"></div>
   <p>{{description}}</p>
@@ -144,26 +145,6 @@
   </p>
 
   <div id="test">
-  </div>
-
-  <div class="comment-form">
-    <form id="comment-form"
-          hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments"
-          hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
-          hx-target="#status"
-    >
-
-      <input type="hidden" name="presentation_id" id="presentation-id" value="{{id}}">
-
-      <div class="form-group">
-        <label for="text_comment">Ваш комментарий:</label>
-        <textarea id="text_comment" name="text_comment" required></textarea>
-      </div>
-
-      <button type="submit">Отправить комментарий</button>
-    </form>
-    <div id="status">
-    </div>
   </div>
 
   <div id="test-block" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/test"
@@ -189,6 +170,32 @@
        hx-ext="client-side-templates"
        mustache-template="fav-template"></div>
   </div>
+  {{/data}}
+
+  {{#registered}}
+  <div class="comment-form">
+    <form id="comment-form"
+          hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments"
+          hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
+          hx-target="#status"
+    >
+
+      <input type="hidden" name="presentation_id" id="presentation-id" value="{{id}}">
+
+      <div class="form-group">
+        <label for="text_comment">Ваш комментарий:</label>
+        <textarea id="text_comment" name="text_comment" required></textarea>
+      </div>
+
+      <button type="submit">Отправить комментарий</button>
+    </form>
+    <div id="status">
+    </div>
+  </div>
+  {{/registered}}
+  {{^registered}}
+  <p>Чтобы оставлять комментарии, надо войти в аккаунт.</p>
+  {{/registered}}
 </template>
 
 
@@ -271,7 +278,6 @@
 </template>
 
 <template id="comments-template">
-  <div class="comments">
     {{#commentsWithDate}}
     <div class="comment" id="comment-{{id}}">
       <div class="comment-author">{{name}}</div>
@@ -302,14 +308,14 @@
     {{#meta}}
     <div style="height: 1px" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/comments/presentation/{{pr_id}}?page={{next_page}}"
          hx-trigger="revealed"
-         hx-target="next .container"
+         hx-target="previous .comment"
+         hx-swap="afterend"
          hx-ext="client-side-templates"
          mustache-template="comments-template">
     </div>
     <div class="container"></div>
     {{/meta}}
     {{^meta}}{{/meta}}
-  </div>
 </template>
 
 
