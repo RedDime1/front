@@ -107,6 +107,7 @@
     <div style="display: flex; flex-flow: row">
       <h1>{{username}}</h1>
       <a href="/favourite.html">Закладки</a>
+      <a href="./list.html">Вернуться</a>
       <button class="logout-btn" onclick="logout()">Выйти</button>
     </div>
   </template>
@@ -352,6 +353,7 @@
 
 <div id="results" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentation"  hx-trigger="load" hx-swap="innerHTML"
      hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
+     hx-headers='js:{"Authorization": authHeader()}'
      hx-target="#content"
      hx-ext="client-side-templates"
      mustache-template="presentation-template">
