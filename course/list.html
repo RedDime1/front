@@ -97,11 +97,11 @@
   {{/progressInfo}}
   {{#data}}
   <div class="card">
+    <a href="./presentation.html?id={{id}}">
     <h2>{{name}}</h2>
     {{#completed}}
     <p><b style="color: green">Пройдено</b></p>
     {{/completed}}
-    <a href="./presentation.html?id={{id}}">
       <img src={{preview}} width="400" class="card-image">
     </a>
     <p class="card-text">{{description}}</p>
