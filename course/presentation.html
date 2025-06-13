@@ -333,15 +333,12 @@
   </div>
   {{/data}}
   {{#meta}}
-  <div class="replies-deep-container">
   <button hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/{{com_id}}?page={{next_page}}"
-          hx-target="previous .reply"
-          hx-swap="afterend"
+          hx-swap="outerHTML"
        hx-ext="client-side-templates"
        mustache-template="reply-template">
     Загрузить ещё ответы
   </button>
-  </div>
   {{/meta}}
   {{^meta}}{{/meta}}
 </template>
