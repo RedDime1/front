@@ -195,41 +195,51 @@ body {
 
 }
 
-.first-poster {
-    background-image: url("../media/Poster_1.png");
+.poster {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     font-family: 'Fatal';
     font-size: 5vh;
     color: black;
+}
+
+.first-poster {
+    background-image: url("../media/Poster_1.png");
+
 }
 
 .second-poster {
     background-image: url("../media/Poster_2.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    font-family: 'Fatal';
-    font-size: 5vh;
-    color: black;
+
 }
 
 .third-poster {
     background-image: url("../media/Poster_3.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    font-family: 'Fatal';
-    font-size: 5vh;
-    color: black;
+
+}
+
+.fourth-poster {
+    background-image: url("../media/Poster_4.png");
+}
+
+.fifth-poster {
+    background-image: url("../media/Poster_5.png");
 }
 
 .sam-poster {
     background-image: url("../media/Sam.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    font-family: 'Fatal';
-    font-size: 5vh;
-    color: black;
 }
+
+.js-poster {
+    background-image: url("../media/js-poster.png");
+}
+
+.garazh-poster {
+    background-image: url("../media/garazh.png");
+}
+
+
+
 
 .about-item img {
     max-width: 70%;
@@ -258,20 +268,9 @@ body {
     font-size: 50px;
     font-weight: bold;
     color: #fff;
-    background: linear-gradient(135deg, #01070c, #02121c);
+    font-family: "ALK";
     position: relative;
     z-index: 2;
-}
-
-.section-title:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 10px;
-    background: linear-gradient(90deg, transparent, #dde2e3, transparent);
-    z-index: 1;
 }
 
 .specialists-container {
@@ -369,6 +368,8 @@ body {
 .map h2 {
     color: #fff;
     font-size: 50px;
+    font-family: ALK;
+    text-align: center;
 }
 
 .map-container {
