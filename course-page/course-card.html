@@ -107,56 +107,38 @@
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div class="specialist-card">
-                        <a href="#">
-                            <img src="../media/MO.png" alt="teacher-img">
-                        </a>
-
+                    <div class="specialist-card" onclick="openModal('teacher1', '../media/MO.png')">
+                        <img src="../media/MO.png" alt="teacher-img">
                     </div>
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="specialist-card">
-                        <a href="#">
-                            <img src="../media/Stanok.png" alt="teacher-img">
-                        </a>
-
+                    <div class="specialist-card" onclick="openModal('teacher1', '../media/Stanok.png')">
+                        <img src="../media/Stanok.png" alt="teacher-img">
                     </div>
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="specialist-card">
-                        <a href="#">
-                            <img src="../media/SIA.png" alt="teacher-img">
-                        </a>
-
+                    <div class="specialist-card" onclick="openModal('teacher1', '../media/SIA.png')">
+                        <img src="../media/SIA.png" alt="teacher-img">
                     </div>
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="specialist-card">
-                        <a href="#">
-                            <img src="../media/Sevich.png" alt="teacher-img">
-                        </a>
-
+                    <div class="specialist-card" onclick="openModal('teacher1', '../media/Sevich.png')">
+                         <img src="../media/Sevich.png" alt="teacher-img">
                     </div>
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="specialist-card">
-                        <a href="#">
-                            <img src="../media/BA.png" alt="teacher-img">
-                        </a>
-
+                    <div class="specialist-card" onclick="openModal('teacher1', '../media/BA.png')">
+                        <img src="../media/BA.png" alt="teacher-img">
                     </div>
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="specialist-card">
-                        <a href="#">
-                            <img src="../media/CV.png" alt="teacher-img">
-                        </a>
-
+                    <div class="specialist-card" onclick="openModal('teacher1', '../media/CV.png')">
+                        <img src="../media/CV.png" alt="teacher-img">
                     </div>
                 </div>
             </div>
@@ -188,6 +170,22 @@
   </div>
 </section>
 
+<div id="teacher1-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-btn" onclick="closeModal('teacher1')">&times;</span>
+        </div>
+        <div class="modal-container">
+          <img src="" alt="photo" width="200" height="300">
+          <div>
+            <h1>ФИО с Бэкэнда</h1>
+            <p>Описание с Бэкэнда по типу Студент 3-го курса университета ИТМО, семинарист. 
+            Разработал и представил лекцию по xxxx второго семестра по фронтенд разработке</p>
+
+          </div>
+        </div>
+    </div>
+</div>
 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
@@ -209,6 +207,27 @@
         slideToClickedSlide: false
       });
     });
+
+    function openModal(teacherId, imgSrc) {
+        const modal = document.getElementById(teacherId + '-modal');
+        modal.style.display = 'flex';
+
+        document.body.style.overflow = 'hidden';
+        const modalImg = modal.querySelector('.modal-container img');
+        modalImg.src = imgSrc;
+    }
+
+    function closeModal(teacherId) {
+        document.getElementById(teacherId + '-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = function(event) {
+        if (event.target.className === 'modal') {
+            event.target.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
   </script>
 </body>
 </html>
