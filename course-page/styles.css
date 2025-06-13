@@ -288,6 +288,7 @@ body {
     max-height: 100%;
     max-width: 100%;
     aspect-ratio: 2/3;
+    cursor: pointer;
 }
 
 .specialist-card h3 {
@@ -423,6 +424,71 @@ body {
     width: 30px;
     height: 30px;
     flex-shrink: 0;
+}
+
+.close-btn {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #f0ecf1;
+        }
+
+.modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            
+            /* background-size: contain;
+            object-fit: cover;  */
+        }
+
+.modal-content {
+            background: white;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: modalFadeIn 0.3s;
+            background-image: url(../media/stena.jpg);
+            border: #ddd solid 5px;
+            
+}
+
+@keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+}
+
+.modal-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10%;
+    padding: 5%;
+}
+
+.modal-container p {
+    justify-content: left;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.modal-container h1 {
+    justify-content: left;
+    font-size: 30px;
+    color: #413202;
 }
 
 .close-btn {
