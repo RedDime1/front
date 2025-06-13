@@ -176,7 +176,6 @@ body {
     text-align: center;
     color: white;
     font-size: 5vh;
-    border: 2px solid rgba(0, 255, 255, 0.5);
     padding: 1vh 1vw;
     font-family: "ALK";
 
@@ -210,6 +209,31 @@ body {
     color: black;
 }
 
+.second-poster {
+    background-image: url("../media/Poster_2.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: 'Fatal';
+    font-size: 5vh;
+    color: black;
+}
+.third-poster {
+    background-image: url("../media/Poster_3.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: 'Fatal';
+    font-size: 5vh;
+    color: black;
+}
+.sam-poster {
+    background-image: url("../media/Sam.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: 'Fatal';
+    font-size: 5vh;
+    color: black;
+}
+
 .about-item img {
     max-width: 70%;
     max-height: 50%;
@@ -223,9 +247,4 @@ body {
     height: 40%;
     width: 100%;
     grid-template-columns: repeat(4, 1fr);
-}
-.about-second-row {
-    height: 40%;
-    width: 100%;
-    grid-template-columns: repeat(3, 1fr);
 }
