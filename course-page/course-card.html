@@ -72,7 +72,103 @@
         </p>
       </div>
     </div>
+
+      <div class="about-row about-first-row">
+          <div class="about-item first-poster">
+              <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+              <p >
+                  Адаптивная верстка
+              </p>
+          </div>
+
+          <div class="about-item sam-poster">
+          </div>
+
+          <div class="about-item second-poster">
+              <img src="../media/svgs/web-security-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+              <p >
+                  Веб-Безопасность
+              </p>
+          </div>
+
+
+
+          <div class="about-item third-poster">
+              <img src="../media/svgs/code-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+              <p >
+                  Фреймворки
+              </p>
+          </div>
+      </div>
   </div>
+</section>
+
+<section id="teachers">
+    <div class="section-title">
+        <span class="title-text">Наши преподаватели</span>
+    </div>
+    <div class="specialists-container">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="specialist-card">
+                        <a href="#">
+                            <img src="../media/MO.png" alt="teacher-img">
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="specialist-card">
+                        <a href="#">
+                            <img src="../media/Stanok.png" alt="teacher-img">
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="specialist-card">
+                        <a href="#">
+                            <img src="../media/SIA.png" alt="teacher-img">
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="specialist-card">
+                        <a href="#">
+                            <img src="../media/Sevich.png" alt="teacher-img">
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="specialist-card">
+                        <a href="#">
+                            <img src="../media/BA.png" alt="teacher-img">
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="specialist-card">
+                        <a href="#">
+                            <img src="../media/CV.png" alt="teacher-img">
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
 </section>
 <section id="map">
   <div class="map">
@@ -95,76 +191,8 @@
     </div>
   </div>
 </section>
-  <div class="section-title">
-        <span class="title-text">Наши преподаватели</span>
-    </div>    
-    <div class="specialists-container">
-        <div class="swiper">
-        <div class="swiper-wrapper">
-            <!-- Карточка 1 -->
-            <div class="swiper-slide">
-            <div class="specialist-card">
-                <img src="../media/Sevich.jpg" alt="teacher-img">
-                <h3>Синицин Иван Александрович</h3>
-                <p class="specialty">Семинарист</p>
-                <a href="#" class="more-link">Подробнее</a>
-            </div>
-            </div>
-            
-            <!-- Карточка 2 -->
-            <div class="swiper-slide">
-            <div class="specialist-card">
-                <img src="../media/Oleg.jpg" alt="teacher-img">
-                <h3>Мохов Олег Львович</h3>
-                <p class="specialty">Преподователь</p>
-                <a href="#" class="more-link">Подробнее</a>
-            </div>
-            </div>
-            
-            <div class="swiper-slide">
-            <div class="specialist-card">
-                <img src="../media/Screenshot_1.jpg" alt="teacher-img">
-                <h3>Влад</h3>
-                <p class="specialty">Семинарист, ученик</p>
-                <a href="#" class="more-link">Подробнее о специалисте</a>
-            </div>
-            </div>
-            
-            <!-- Добавьте дубликаты карточек для демонстрации прокрутки -->
-            <div class="swiper-slide">
-            <div class="specialist-card">
-                <img src="../media/AB.jpg" alt="teacher-img">
-                <h3>Белуган Александр Вадимович</h3>
-                <p class="specialty">Семинарист, ученик</p>
-                <a href="#" class="more-link">Подробнее</a>
-            </div>
-            </div>
-            
-            <!-- Добавьте дубликаты карточек для демонстрации прокрутки -->
-            <div class="swiper-slide">
-            <div class="specialist-card">
-                <img src="../media/Stanok.jpg" alt="teacher-img">
-                <h3>Станкевич Андрей Станкевич</h3>
-                <p class="specialty">Декан ФИТиП, преподаватель</p>
-                <a href="#" class="more-link">Подробнее</a>
-            </div>
-            </div>
-            
-            <div class="swiper-slide">
-            <div class="specialist-card">
-                <img src="../media/Sevich.jpg" alt="teacher-img">
-                <h3>Севич</h3>
-                <p class="specialty">Севич</p>
-                <a href="#" class="more-link">Севич</a>
-            </div>
-            </div>
-        </div>
-        
-        <!-- Кнопки навигации -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        </div>
-    </div>
+
+
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -180,7 +208,7 @@
           768: { slidesPerView: 3 },
           992: { slidesPerView: 4 }
         },
-        loop: false, //прокрутка - нет
+        loop: false,
         centeredSlides: false,
         slideToClickedSlide: false
       });
