@@ -1,100 +1,161 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Авторизация</title>
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
+
     <style>
         body {
+            background-color: #0f172a;
+            color: #e2e8f0;
             font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
+            margin: 0;
             padding: 20px;
         }
+
         .auth-container {
             display: flex;
-            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px 0;
         }
-        .auth-form {
-            flex: 1;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-        input {
-            display: block;
+
+        .auth-card {
+            background-color: #111827;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 400px;
             width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            border: 2px solid #38bdf8;
+        }
+
+        .auth-card.purple {
+            border-color: #c084fc;
+        }
+
+        .auth-card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #e0e7ff;
+        }
+
+        input.dark-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            background-color: #1e293b;
+            color: white;
+            font-size: 1rem;
             box-sizing: border-box;
         }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
+
+        input.dark-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .auth-button {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #67e8f9;
+            border: 2px solid #67e8f9;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
         }
-        button:hover {
-            background-color: #45a049;
+
+        .auth-button:hover {
+            background-color: #67e8f925;
         }
-        .logout-btn {
-            background-color: #f44336;
+
+        .error-text {
+            color: #f87171;
+            margin-top: 10px;
+            font-size: 0.9rem;
         }
-        .logout-btn:hover {
-            background-color: #d32f2f;
+
+        .logout-button {
+            background: transparent;
+            color: #f87171;
+            border: 2px solid #f87171;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .logout-button:hover {
+            background-color: #f8717120;
         }
     </style>
 </head>
-<body>
-<div id="auth-status">
-</div>
 
+<body>
+<div id="header-placeholder"></div>
+
+<script>
+    fetch('header/header.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('header-placeholder').innerHTML = html;
+            const script = document.createElement('script');
+            script.src = 'header/menu.js';
+            document.body.appendChild(script);
+        });
+</script>
 
 <div class="auth-container" id="auth-forms" style="display: none;">
-    <div class="auth-form">
+    <!-- Вход -->
+    <div class="auth-card">
         <h2>Вход</h2>
-        <form id="login-form" hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local"  hx-swap="none">
-            <input type="text" name="identifier" placeholder="Email или логин" required>
-            <input type="password" name="password" placeholder="Пароль" required>
-            <button type="submit">Войти</button>
-            <div id="login-error" class="error"></div>
+        <form id="login-form"
+              hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local"
+              hx-swap="none">
+            <input class="dark-input" type="text" name="identifier" placeholder="Email или логин" required />
+            <input class="dark-input" type="password" name="password" placeholder="Пароль" required />
+            <button type="submit" class="auth-button">Войти</button>
+            <div id="login-error" class="error-text"></div>
         </form>
     </div>
 
-    <div class="auth-form">
+    <!-- Регистрация -->
+    <div class="auth-card purple">
         <h2>Регистрация</h2>
-        <form id="register-form" hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local/register" hx-swap="none">
-            <input type="text" name="username" placeholder="Логин" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Пароль" required>
-            <button type="submit">Зарегистрироваться</button>
-            <div id="register-error" class="error"></div>
+        <form id="register-form"
+              hx-post="https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local/register"
+              hx-swap="none">
+            <input class="dark-input" type="text" name="username" placeholder="Логин" required />
+            <input class="dark-input" type="email" name="email" placeholder="Email" required />
+            <input class="dark-input" type="password" name="password" placeholder="Пароль" required />
+            <button type="submit" class="auth-button">Зарегистрироваться</button>
+            <div id="register-error" class="error-text"></div>
         </form>
     </div>
 </div>
 
 <template id="login-template">
-    <h1>Вы уже авторизованы, {{username}}</h1>
-    <h2>Ваша почта: {{email}}</h2>
-    <a href="/favourite.html">Закладки</a>
-    <h3>Если это не вы, то можете выйти:</h3>
-    <button class="logout-btn" onclick="logout()">Выйти</button>
-    <button class="index-btn" onclick="tohub()">На главную страницу</button>
+    <div class="auth-card">
+        <h2>Вы авторизованы как {{username}}</h2>
+        <p>Email: {{email}}</p>
+        <a class="auth-button" href="/favourite.html">Перейти в закладки</a>
+        <button class="logout-button" onclick="logout()">Выйти</button>
+    </div>
 </template>
-
 
 <div id="me-info"
      hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"
-     hx-target="#auth-status"
+     hx-target="body"
      hx-trigger="load"
      hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
      hx-ext="client-side-templates"
@@ -104,37 +165,31 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const jwt = localStorage.getItem('jwt');
-        const authForms = document.getElementById('auth-forms');
         if (!jwt) {
-            authForms.style.display = 'flex';
+            document.getElementById('auth-forms').style.display = 'flex';
         }
     });
 
     document.body.addEventListener('htmx:afterRequest', function (evt) {
-        const forms = ['https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local/register', 'https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local'];
+        const paths = [
+            'https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local',
+            'https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local/register'
+        ];
 
-        if (forms.includes(evt.detail.requestConfig.path) && evt.detail.successful) {
-            const {jwt, user} = JSON.parse(evt.detail.xhr.response);
+        if (paths.includes(evt.detail.requestConfig.path) && evt.detail.successful) {
+            const { jwt } = JSON.parse(evt.detail.xhr.response);
             localStorage.setItem('jwt', jwt);
-            const returnUrl = document.referrer && document.referrer.includes(window.location.host)
-                ? document.referrer
-                : 'index.html';
-
-            window.location.href = returnUrl;
-        } else if (evt.detail.requestConfig.path === "https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local/register") {
-            document.getElementById('register-error').innerHTML = JSON.parse(evt.detail.xhr.responseText).error.message;
-        } else if (evt.detail.requestConfig.path === "https://steadfast-champion-93368c3d1a.strapiapp.com/api/auth/local") {
-            document.getElementById('login-error').innerHTML = JSON.parse(evt.detail.xhr.responseText).error.message;
+            window.location.href = 'index.html';
+        } else if (evt.detail.requestConfig.path.includes("register")) {
+            document.getElementById('register-error').innerText = JSON.parse(evt.detail.xhr.responseText).error.message;
+        } else if (evt.detail.requestConfig.path.includes("local")) {
+            document.getElementById('login-error').innerText = JSON.parse(evt.detail.xhr.responseText).error.message;
         }
     });
 
     function logout() {
         localStorage.removeItem('jwt');
         window.location.reload();
-    }
-
-    function tohub() {
-        window.location.href = 'index.html'
     }
 </script>
 </body>
