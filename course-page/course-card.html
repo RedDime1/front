@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Курс</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="header-placeholder"></div>
+<script>
+  fetch('../header/header.html')
+          .then(res => res.text())
+          .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+          });
+</script>
+<script src="../header/menu.js"></script>
+<section id="banner" class="banner section">
+  <div class="table">
+    <div class="logo_1">
+      <div class="front">
+        <p>
+          Frontend
+        </p>
+      </div>
+      <div class="school_frame">
+        <div class="school">
+          <p>School</p>
+        </div>
+      </div>
+      <div class="yandex">
+        <p>from Yandex!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section about">
+  <div class="about-content">
+    <h1 class="elegant-border-aqua">
+      Чему Научимся?
+    </h1>
+
+    <div class="about-row about-first-row">
+      <div class="about-item first-poster">
+        <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+        <p >
+          Адаптивная верстка
+        </p>
+      </div>
+
+      <div class="about-item elegant-border-aqua">
+        <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+        <p >
+          Адаптивная верстка
+        </p>
+      </div>
+
+      <div class="about-item elegant-border-aqua">
+        <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+        <p >
+          Адаптивная верстка
+        </p>
+      </div>
+
+      <div class="about-item elegant-border-aqua">
+        <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+        <p >
+          Адаптивная верстка
+        </p>
+      </div>
+    </div>
+    <div class="about-row about-second-row">
+      <div class="about-item elegant-border-aqua">
+        <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+        <p >
+          Адаптивная верстка
+        </p>
+      </div>
+
+      <div class="about-item elegant-border-aqua">
+        <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+        <p >
+          Адаптивная верстка
+        </p>
+      </div>
+      <div class="about-item elegant-border-aqua">
+        <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+        <p >
+          Адаптивная верстка
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</body>
+</html>

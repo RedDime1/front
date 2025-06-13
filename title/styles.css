@@ -1,0 +1,215 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5%;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #01070c, #02121c);
+    background-size: 400% 400%;
+    font-family: Arial, sans-serif;
+}
+
+@font-face {
+    font-family: 'Neon Spark';
+    src: url('../fonts/Neon Spark.otf');
+}
+
+.elegant-border-aqua {
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 255, 0.5); /* едва заметная граница */
+    box-shadow:
+            0 0 6px rgba(0, 255, 255, 0.15),
+            0 0 12px rgba(0, 255, 255, 0.08);
+}
+
+.elegant-border-purple {
+    border-radius: 20px;
+    border: 1px solid rgba(170, 0, 255, 0.5); /* едва заметная граница */
+    box-shadow:
+            0 0 6px rgba(170, 0, 255, 0.15),
+            0 0 12px rgba(170, 0, 255, 0.08);
+}
+
+.elegant-border-blue {
+    border-radius: 20px;
+    border: 1px solid rgba(0, 51, 255, 0.5); /* едва заметная граница */
+    box-shadow:
+            0 0 6px rgba(0, 51, 255, 0.15),
+            0 0 12px rgba(0, 51, 255, 0.08);
+}
+
+.elegant-border-pink {
+    border-radius: 20px;
+    border: 1px solid rgba(183, 113, 205, 0.5); /* едва заметная граница */
+    box-shadow:
+            0 0 6px rgba(144, 110, 156, 0.15),
+            0 0 12px rgba(144, 110, 156, 0.08);
+}
+
+.continue-button:hover {
+    background-color: rgba(0, 255, 255, 0.7);
+}
+.continue-button:hover a{
+    color: white;
+}
+
+.courses{
+    width: 100%;
+}
+
+.course-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    max-width: 95%;
+}
+
+.general-info {
+    width: 100%;
+    aspect-ratio: 16 / 16;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 0.5%;
+    padding: 1%;
+
+}
+
+.general-info-card{
+    width: 100%;
+    aspect-ratio: 7 / 8;
+    display: flex;
+    flex-direction: column;
+    padding: 5% 3% 3%;
+    align-items: center;
+}
+
+.general-info-card img {
+    max-width: 80%;
+    max-height: 40%;
+    margin-bottom: 5%;
+}
+
+.general-info h1{
+    font-size: 180%;
+    text-align: center;
+
+}
+
+.general-info-card p{
+    text-align: start;
+    color: gray;
+    font-size: 100%;
+    margin-top: 5%;
+
+}
+
+.general-info-card-bottom{
+    width: 100%;
+    margin-top: auto;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    justify-content: center;
+}
+
+.general-info-card-bottom button{
+    width: 100%;
+    margin-top: 5%;
+    align-self: center;
+}
+
+.cyan-text {
+    color: #0ff;
+}
+
+.side-menu a:hover {
+    text-decoration: underline;
+}
+
+.course-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5%;
+    margin-bottom: 2%;
+    color: white;
+    padding: 2%;
+}
+
+.teacher-info {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    aspect-ratio: 6 / 1;
+    gap: 2.5%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2%;
+}
+
+.teacher-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    overflow: hidden;
+    padding: 5%;
+    margin-bottom: 2%;
+}
+
+.teacher-card img {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    max-width: 30%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.teacher-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 3%;
+    padding: 5%;
+}
+
+.teacher-info h1{
+    color: #80efff;
+    font-size: 90%;
+}
+.teacher-info p{
+    font-size: 80%;
+    color: #627c79;
+}
+
+.tags{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    gap: 5%;
+    aspect-ratio: 15 / 1;
+    padding: 0 5%;
+    color: #bd96e1;
+    margin-bottom: 2%;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1% 5%;
+}
+
