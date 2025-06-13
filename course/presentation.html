@@ -335,7 +335,8 @@
   {{#meta}}
   <div class="replies-deep-container">
   <button hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/replies/{{com_id}}?page={{next_page}}"
-       hx-target="closest .replies-deep-container"
+          hx-target="previous .reply"
+          hx-swap="afterend"
        hx-ext="client-side-templates"
        mustache-template="reply-template">
     Загрузить ещё ответы
