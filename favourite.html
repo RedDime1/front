@@ -81,6 +81,17 @@
     .ttx {
         color: blue;
     }
+
+    .bttns {
+        display: flex;
+        padding: 6%;
+    }
+
+    @media (max-width: 700px) {
+        .bttns {
+            flex-wrap: wrap;
+        }
+    }
     
 
 </style>
@@ -92,7 +103,7 @@
         <a href="./../auth.html">Войти или зарегистрироваться</a>
     </div>
     <template id="login-template">
-        <div style="display: flex; flex-flow: row">
+        <div class="bttns">
             <h1 class="ttx">{{username}}</h1>
             <button onclick="returnPage()" class="back-bttn">Вернуться</button>
             <button class="logout-btn" onclick="logout()">Выйти</button>
