@@ -20,7 +20,7 @@ body {
 }
 
 .banner {
-    height: 90vh;
+    height: 95vh;
     margin-bottom: 0;
     box-sizing: border-box;
 
@@ -549,46 +549,35 @@ body {
     font-size: 30px;
     color: #413202;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> d5ffeec54546ecb4fbd7742b319dc879b6442210
 .prev {
     font-size: 50px;
     color: #0077cc;
     width: 100%;
-    height: 1500px;
+    height: 95vh;
     z-index: 10000;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-image: url("../media/wall_splat.png");
 }
 
-.prev img {
-    min-width: 100%;
-    min-height: 100%;
-}
 
 .prev-main {
     display: flex;
-    padding: 0%;
-    padding-top: 17%;
     box-sizing: border-box;
-    margin-top: 0%;
-    margin-left: 12%;
-    margin-right: 22%;
-
-    width: 90%;
+    padding: 5% 10%;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
     font-family: 'ALK';
     font-size: 30px;
     color: #333;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .prev-main img {
     width: 20%;
     height: 20%;
 }
-<<<<<<< HEAD
 
 .prev-welcome {
     display: flex;
@@ -607,8 +596,6 @@ body {
     margin-top: 23%;
 }
 
-=======
->>>>>>> d5ffeec54546ecb4fbd7742b319dc879b6442210
 .courses {
     margin-top: 20vh;
     margin-bottom: 30vh;
@@ -616,6 +603,7 @@ body {
 
 .courses-content {
     height:40vh;
+    max-width:100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -650,6 +638,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    justify-content: flex-start;
     max-width: 40%;
     max-height: 100%;
     width: 100vw;
@@ -675,7 +664,6 @@ body {
 .cassete-item {
     max-width: 12.5%;
     max-height: 100%;
-    width: 100vw;
     height: 100vh;
     margin: 0;
     transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
