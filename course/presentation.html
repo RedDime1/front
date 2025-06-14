@@ -1,128 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Презентация</title>
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
   <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
   <script src="https://unpkg.com/mustache@latest"></script>
-  <script src="/logout.js"></script>
+  <script src="/header/logout.js"></script>
+  <script src="/header/header-init.js"></script>
+  <script src="/header/menu.js"></script>
 
-  <style>
-    .comment {
-      margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-
-    .replies-container {
-      margin-left: 30px;  /* Отступ для вложенности */
-      border-left: 2px solid #ccc;
-      padding-left: 10px;
-    }
-
-    .reply-btn, .show-replies-btn {
-      background: none;
-      border: none;
-      color: blue;
-      cursor: pointer;
-      padding: 5px 0;
-    }
-
-    .show-replies-btn {
-      font-size: 0.9em;
-      color: #666;
-    }
-
-    .comments_form {
-      display: flex;
-      flex-direction: row;
-    }
-
-    .test-form {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #f9f9f9;
-      border-radius: 8px;
-    }
-
-    .question {
-      margin-bottom: 25px;
-      padding: 15px;
-      background: white;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .answers {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .answer-option {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .answer-option:hover {
-      background: #f0f0f0;
-    }
-
-    .answer-option input {
-      margin-right: 10px;
-    }
-
-    .submit-btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    .submit-btn:hover {
-      background: #45a049;
-    }
-  </style>
+  <link rel="stylesheet" href="./pres-styles.css">
 </head>
-<header>
-  <div id="log_info">
-    <a href="./../auth.html">Войти или зарегистрироваться</a>
-    <a href="./list.html">Вернуться</a>
-  </div>
-  <template id="login-template">
-    <div style="display: flex; flex-flow: row">
-      <h1>{{username}}</h1>
-      <a href="/favourite.html">Закладки</a>
-      <a href="./list.html">Вернуться</a>
-      <button class="logout-btn" onclick="logout()">Выйти</button>
-    </div>
-  </template>
 
-
-  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"
-       hx-target="#log_info"
-       hx-trigger="load"
-       hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'
-       hx-ext="client-side-templates"
-       mustache-template="login-template">
-  </div>
-</header>
 <body>
+<!--<header>-->
+
+<!--  <div id="log_info">-->
+<!--    <a href="./../auth.html">Войти или зарегистрироваться</a>-->
+<!--    <a href="./list.html">Вернуться</a>-->
+<!--  </div>-->
+<!--  <template id="login-template">-->
+<!--    <div style="display: flex; flex-flow: row; align-items: center; justify-content: center; color:darkcyan; gap: 5%">-->
+<!--      <p>{{username}}</p>-->
+<!--      <a href="../favourite.html">-->
+<!--        <button class="user-button elegant-border-aqua">-->
+<!--          <img src="../media/svgs/star-svgrepo-com.svg" height="20" width="20" alt="star">-->
+<!--        </button>-->
+<!--      </a>-->
+<!--      <button class="user-button elegant-border-aqua" onclick="logout()">-->
+<!--        <img src="../media/svgs/exit-svgrepo-com.svg" height="20" width="20" alt="star">-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </template>-->
+
+
+<!--  <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/users/me"-->
+<!--       hx-target="#log_info"-->
+<!--       hx-trigger="load"-->
+<!--       hx-headers='js:{"Authorization": "Bearer " + localStorage.getItem("jwt")}'-->
+<!--       hx-ext="client-side-templates"-->
+<!--       mustache-template="login-template">-->
+<!--  </div>-->
+<!--</header>-->
+<div id="header-placeholder"></div>
+
+
+<script>
+  fetch('../header/header.html')
+          .then(res => res.text())
+          .then(data => {
+            const container = document.getElementById('header-placeholder');
+            container.innerHTML = data;
+
+            htmx.process(container);     // активируем HTMX на вставленном контенте
+            initHeader();                // функция, которую мы сейчас создадим
+          });
+</script>
 
 <div id="content">
   <h1>Загрузка</h1>

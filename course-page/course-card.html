@@ -9,14 +9,23 @@
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="/header/logout.js"></script>
+    <script src="/header/header-init.js"></script>
+    <script src="/header/menu.js"></script>
 </head>
 <body>
 <div id="header-placeholder"></div>
+
+
 <script>
     fetch('../header/header.html')
         .then(res => res.text())
         .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
+            const container = document.getElementById('header-placeholder');
+            container.innerHTML = data;
+
+            htmx.process(container);     // активируем HTMX на вставленном контенте
+            initHeader();                // функция, которую мы сейчас создадим
         });
 </script>
 <script src="../header/menu.js"></script>
@@ -44,9 +53,12 @@
 <section id="preview1" class="prev">
     <div class="prev-main">
         <div class="prev-welcome">
-            <h1><strong>Добро пожаловать на курс по фронтенд-разработке!</strong></h1>
-            <p>Рады, что вы с нами! Вот и настал момент, когда ваш путь в мир крутых интерфейсов и отзывчивых сайтов
-                официально стартует.</p>
+            <div class="prev-text">
+                <h1><strong>Добро пожаловать на курс по фронтенд-разработке!</strong></h1>
+                <p>Рады, что вы с нами! Вот и настал момент, когда ваш путь в мир крутых интерфейсов и отзывчивых сайтов
+                    официально стартует.</p>
+            </div>
+
             <img src="../media/marks.png" alt="marks" width="1000" height="1000">
         </div>
 
@@ -178,42 +190,27 @@
     <div class="specialists-container">
         <div class="swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="specialist-card" onclick="openModal('teacher1', '../media/MO.png')">
-                        <img src="../media/portraits/MO.png" alt="teacher-img">
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="specialist-card" onclick="openModal('teacher1', '../media/Stanok.png')">
-                        <img src="../media/portraits/Stanok.png" alt="teacher-img">
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="specialist-card" onclick="openModal('teacher1', '../media/SIA.png')">
-                        <img src="../media/portraits/SIA.png" alt="teacher-img">
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="specialist-card" onclick="openModal('teacher1', '../media/Sevich.png')">
-                        <img src="../media/portraits/Sevich.png" alt="teacher-img">
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="specialist-card" onclick="openModal('teacher1', '../media/BA.png')">
-                        <img src="../media/portraits/BA.png" alt="teacher-img">
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="specialist-card" onclick="openModal('teacher1', '../media/CV.png')">
-                        <img src="../media/portraits/CV.png" alt="teacher-img">
-                    </div>
+                <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/cards?fields[0]=name&populate=photo"
+                     hx-target=".swiper-wrapper"
+                     hx-trigger="load"
+                     hx-ext="client-side-templates"
+                     mustache-template="cards-template">
                 </div>
             </div>
+
+            <template id="cards-template">
+                {{#data}}
+                <div class="swiper-slide">
+                    <div class="specialist-card" onclick="openModal('teacher1', '{{documentId}}')">
+                        {{#photo}}
+                        {{#formats}}
+                        <img src="{{small.url}}" alt="teacher-img">
+                        {{/formats}}
+                        {{/photo}}
+                    </div>
+                </div>
+                {{/data}}
+            </template>
 
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
@@ -249,14 +246,31 @@
             <span class="close-btn" onclick="closeModal('teacher1')">&times;</span>
         </div>
         <div class="modal-container">
-            <img src="" alt="photo" width="200" height="300">
+
+        </div>
+
+        <div id="card-loader" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/cards/"
+             hx-target=".modal-container"
+             hx-trigger="loadCard from:body"
+             hx-ext="client-side-templates"
+             mustache-template="card-template">
+        </div>
+
+
+        <template id="card-template">
+            {{#data}}
+            {{#photo}}
+            {{#formats}}
+            <img src="{{small.url}}" alt="photo" width="200" height="300">
+            {{/formats}}
+            {{/photo}}
             <div>
-                <h1>ФИО с Бэкэнда</h1>
-                <p>Описание с Бэкэнда по типу Студент 3-го курса университета ИТМО, семинарист.
-                    Разработал и представил лекцию по xxxx второго семестра по фронтенд разработке</p>
+                <h1>{{name}}</h1>
+                <p>{{description}}</p>
 
             </div>
-        </div>
+            {{/data}}
+        </template>
     </div>
 </div>
 
@@ -281,17 +295,26 @@
         });
     });
 
-    function openModal(teacherId, imgSrc) {
+    function openModal(teacherId, src) {
         const modal = document.getElementById(teacherId + '-modal');
+        const cardLoader = modal.querySelector('#card-loader');
+        cardLoader.setAttribute('hx-get', 'https://steadfast-champion-93368c3d1a.strapiapp.com/api/cards/' + src + '?populate=photo');
+        htmx.process(cardLoader);
+        htmx.trigger(cardLoader, 'loadCard');
         modal.style.display = 'flex';
 
         document.body.style.overflow = 'hidden';
-        const modalImg = modal.querySelector('.modal-container img');
-        modalImg.src = imgSrc;
+
+
     }
 
     function closeModal(teacherId) {
-        document.getElementById(teacherId + '-modal').style.display = 'none';
+        const modal = document.getElementById(teacherId + '-modal')
+        modal.style.display = 'none';
+        const container = modal.querySelector('.modal-container');
+        if (container) {
+            container.innerHTML = '';
+        }
         document.body.style.overflow = 'auto';
     }
 

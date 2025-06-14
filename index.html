@@ -8,6 +8,9 @@
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="/header/logout.js"></script>
+    <script src="/header/header-init.js"></script>
+    <script src="/header/menu.js"></script>
 </head>
 
 
@@ -15,11 +18,16 @@
 <body>
 <div id="header-placeholder"></div>
 
+
 <script>
-    fetch('header/header.html')
+    fetch('../header/header.html')
         .then(res => res.text())
         .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
+            const container = document.getElementById('header-placeholder');
+            container.innerHTML = data;
+
+            htmx.process(container);     // активируем HTMX на вставленном контенте
+            initHeader();                // функция, которую мы сейчас создадим
         });
 </script>
 <script src="header/menu.js"></script>
@@ -37,7 +45,7 @@
 
                     <div class="general-info-card-bottom">
                         <a class="cyan-text">Процесс прохождения 0%</a>
-                        <button class="elegant-border-aqua menu-button continue-button">
+                        <button class="elegant-border-aqua continue-button">
                             <a class="cyan-text" href="course-page/course-card.html">Продолжить</a>
                         </button>
                     </div>
@@ -77,7 +85,7 @@
 
                     <div class="general-info-card-bottom">
                         <a class="cyan-text">Процесс прохождения 0%</a>
-                        <button class="elegant-border-aqua menu-button continue-button">
+                        <button class="elegant-border-aqua continue-button continue-button">
                             <a class="cyan-text" href="#">Пока нельзя</a>
                         </button>
                     </div>
@@ -113,7 +121,7 @@
 
                     <div class="general-info-card-bottom">
                         <a class="cyan-text">Процесс прохождения 0%</a>
-                        <button class="elegant-border-aqua menu-button">
+                        <button class="elegant-border-aqua continue-button">
                             <a class="cyan-text" href="#">Пока нельзя</a>
                         </button>
                     </div>
