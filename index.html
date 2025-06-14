@@ -26,11 +26,10 @@
             const container = document.getElementById('header-placeholder');
             container.innerHTML = data;
 
-            htmx.process(container);     // активируем HTMX на вставленном контенте
-            initHeader();                // функция, которую мы сейчас создадим
+            htmx.process(container);
+            initHeader();
         });
 </script>
-<script src="header/menu.js"></script>
 <section class="courses">
     <div class="course-container">
         <div class="course-card elegant-border-blue" id="frontend-course">
@@ -39,10 +38,6 @@
 
                     <img src="media/frontendcover.jpg" alt="course-img" class="elegant-border-aqua" width="800" height="800">
                     <h1>Школа Фронтенда</h1>
-
-                    <p>Ну там Влад воскрес и вообще у всех всё хорошо</p>
-
-
                     <div class="general-info-card-bottom">
                         <a class="cyan-text">Процесс прохождения 0%</a>
                         <button class="elegant-border-aqua continue-button">
@@ -53,23 +48,14 @@
             </div>
             <div class="teacher-info">
                 <div class="teacher-card elegant-border-purple">
-                    <img src="media/Screenshot_1.png" alt="teacher-img">
+                    <img src="media/photo_2025-04-29_22-30-36.jpg" alt="teacher-img" height="120" width="120">
                     <div class="teacher-name">
-                        <h1>Владислав Целиков</h1>
-                        <p>The man, The Myth, The Microfrontender</p>
+                        <h1>Олег Мохов</h1>
+                        <p>Куратор программы, Избранник Афродиты</p>
                     </div>
                 </div>
             </div>
-            <div class="tags">
-                <div id="tagsss">
-
-                </div>
-                <div class="tag elegant-border-pink">
-                    <p>#frontend</p>
-                </div>
-                <div class="tag elegant-border-pink">
-                    <p>#course1</p>
-                </div>
+            <div class="tags" id="tagsss">
             </div>
         </div>
 
@@ -93,7 +79,7 @@
             </div>
             <div class="teacher-info">
                 <div class="teacher-card elegant-border-purple">
-                    <img src="media/Screenshot_1.png" alt="teacher-img">
+                    <img src="media/Grigori_Perelman,_1993_(re-scanned)_(cropped).jpg" alt="teacher-img" height="120" width="120">
                     <div class="teacher-name">
                         <h1>Тест Тестов</h1>
                         <p>Человек</p>
@@ -129,14 +115,14 @@
             </div>
             <div class="teacher-info">
                 <div class="teacher-card elegant-border-purple">
-                    <img src="media/AB.jpg" alt="teacher-img">
+                    <img src="media/AB.jpg" alt="teacher-img" height="120" width="120">
                     <div class="teacher-name">
                         <h1>Александр Белуган</h1>
                         <p>Студент ИТМО</p>
                     </div>
                 </div>
                 <div class="teacher-card elegant-border-purple">
-                    <img src="media/IS.jpg" alt="teacher-img">
+                    <img src="media/IS.jpg" alt="teacher-img" height="120" width="120">
                     <div class="teacher-name">
                         <h1>Иван Синицин</h1>
                         <p>Студент ИТМО</p>
@@ -155,11 +141,12 @@
     </div>
 
     <template id="tags-list-template">
-        {{#data}}
-        <div class="tag-item">
-            #{{name}}
-        </div>
-        {{/data}}
+            {{#data}}
+            <div class="tag elegant-border-pink">
+                #{{name}}
+            </div>
+            {{/data}}
+
     </template>
 
     <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/tags"
