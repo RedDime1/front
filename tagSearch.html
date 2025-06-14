@@ -109,6 +109,7 @@
          hx-ext="client-side-templates"
          mustache-template="login-template">
     </div>
+
 </header>
 
 <div id="tags-search"></div>
@@ -118,8 +119,8 @@
 <template id="tags-list-template">
 
     <form id="tags-form" hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentations/tags" hx-target="#search-result"
-          hx-trigger="load"
           hx-ext="client-side-templates"
+          hx-trigger="load, change"
           mustache-array-template="presentations-template">
         {{#data}}
         <label class="tag-item">
