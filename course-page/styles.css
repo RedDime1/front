@@ -569,7 +569,7 @@ body {
     height: 100%;
     justify-content: center;
     font-family: 'ALK';
-    font-size: 3vh;
+    font-size: 2.5vh;
     color: #333;
     grid-template-columns: repeat(2, 1fr);
 }
@@ -581,6 +581,12 @@ body {
     max-width: 30%;
     margin: 5% 5% 0 0;
 
+}
+
+.prev-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .prev-welcome img {
