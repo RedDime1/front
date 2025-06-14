@@ -8,5 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="htmx.org" level="application" />
+    <orderEntry type="library" name="htmx-ext-client-side-templates" level="application" />
+    <orderEntry type="library" name="mustache" level="application" />
   </component>
 </module>

@@ -14,7 +14,7 @@ header {
 
 body {
     height: 100vh;
-    background: linear-gradient(135deg, #01070c, #02121c);
+    background: linear-gradient(135deg, #041727, #02121c);
     background-size: 400% 400%;
     font-family: Arial, sans-serif;
 }
@@ -213,3 +213,15 @@ body {
     padding: 1% 5%;
 }
 
+.continue-button {
+    z-index: 1001;
+    background: transparent;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    padding: 10px 15px;
+    font-size: 18px;
+    color: #0ff;
+    font-family: 'Neon Spark', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

@@ -9,14 +9,23 @@
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="/header/logout.js"></script>
+    <script src="/header/header-init.js"></script>
+    <script src="/header/menu.js"></script>
 </head>
 <body>
 <div id="header-placeholder"></div>
+
+
 <script>
     fetch('../header/header.html')
         .then(res => res.text())
         .then(data => {
-            document.getElementById('header-placeholder').innerHTML = data;
+            const container = document.getElementById('header-placeholder');
+            container.innerHTML = data;
+
+            htmx.process(container);     // активируем HTMX на вставленном контенте
+            initHeader();                // функция, которую мы сейчас создадим
         });
 </script>
 <script src="../header/menu.js"></script>
