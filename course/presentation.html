@@ -69,11 +69,27 @@
   <iframe src="https://docs.google.com/presentation/d/e/{{link}}/pubembed?start=false&loop=false&delayms=10000" frameborder="0" width="320" height="195" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
   <p>Выступающие: </p>
   {{#speakers}}
-  <a href="./speaker.html?id={{id}}">
-    <h3>{{name}}</h3>
-  </a>
+  <div class="speakers-container">
+    <a href="./speaker.html?id={{id}}" class="speaker-card">
+      {{#avatar}}
+      <div class="speaker-info">
+        <img src="{{avatar}}" alt="{{name}}" class="speaker-avatar">
+        <div>
+          <h3>{{name}}</h3>
+          {{#position}}<p>{{position}}</p>{{/position}}
+        </div>
+      </div>
+      {{/avatar}}
+      {{^avatar}}
+      <h3>{{name}}</h3>
+      {{#position}}<p>{{position}}</p>{{/position}}
+      {{/avatar}}
+    </a>
+  </div>
   {{/speakers}}
-  {{^speakers}}<p>Спикеры этой лекции не предусмотрены</p>{{/speakers}}
+  {{^speakers}}
+  <p class="no-speakers">Спикеры этой лекции не предусмотрены</p>
+  {{/speakers}}
   <p>Тэги:
     {{#tags}}
     <a href="/tagSearch.html">#{{name}}</a>

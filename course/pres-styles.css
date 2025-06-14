@@ -110,7 +110,7 @@ body {
 
 #comments {
     width: 100%;
-    max-width: 800px; /* Ограничиваем ширину контента */
+    max-width: 800px;
 }
 
 .comment {
@@ -242,4 +242,45 @@ body {
     .comment, .reply {
         padding: 12px;
     }
+}
+
+.speakers-container {
+    margin: 10px 0;
+    padding: 0;
+}
+
+.speakers-container h2 {
+    margin-bottom: 8px;
+    color: #b0bec5;
+    font-size: 1.1em;
+    font-weight: normal;
+}
+
+.speaker-card {
+    display: inline-block;
+    margin: 5px 15px 5px 0;
+    padding: 8px 12px;
+    background: rgba(79, 195, 247, 0.1);
+    border-radius: 6px;
+    border: 1px solid rgba(79, 195, 247, 0.2);
+    transition: all 0.3s ease;
+}
+
+.speaker-card:hover {
+    background: rgba(79, 195, 247, 0.2);
+    transform: translateY(-2px);
+}
+
+.speaker-card h3 {
+    color: #4fc3f7;
+    margin: 0;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.no-speakers {
+    color: #b0bec5;
+    font-style: italic;
+    margin: 5px 0;
+    font-size: 0.9em;
 }
