@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Курс</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-  
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
 </head>
 <body>
 <div id="header-placeholder"></div>
 <script>
-  fetch('../header/header.html')
-          .then(res => res.text())
-          .then(data => {
+    fetch('../header/header.html')
+        .then(res => res.text())
+        .then(data => {
             document.getElementById('header-placeholder').innerHTML = data;
-          });
+        });
 </script>
 <script src="../header/menu.js"></script>
 <section id="banner" class="banner section">
-  <div class="table">
-    <div class="logo_1">
-      <div class="front">
-        <p>
-          Frontend
-        </p>
-      </div>
-      <div class="school_frame">
-        <div class="school">
-          <p>School</p>
+    <div class="table">
+        <div class="logo_1">
+            <div class="front">
+                <p>
+                    Frontend
+                </p>
+            </div>
+            <div class="school_frame">
+                <div class="school">
+                    <p>School</p>
+                </div>
+            </div>
+            <div class="yandex">
+                <p>from Yandex!</p>
+            </div>
         </div>
-      </div>
-      <div class="yandex">
-        <p>from Yandex!</p>
-      </div>
     </div>
-  </div>
 </section>
 
 
 
 <section id="preview1"  class="prev">
+<<<<<<< HEAD
   <div class="prev-main">
     <div class="prev-welcome">
         <h1><strong>Добро пожаловать на курс по фронтенд-разработке!</strong></h1>
@@ -69,102 +71,102 @@
         </ul>
     </div>
   </div>
+=======
+    <div class="prev-main">
+        <h1><strong>Добро пожаловать на курс по фронтенд-разработке!</strong></h1>
+        <img src="../media/" alt="">
+    </div>
+>>>>>>> d5ffeec54546ecb4fbd7742b319dc879b6442210
 </section>
 
 
 
 <section id="about" class="section about">
-  <div class="about-content">
-    <h1>
-      Чему Научимся?
-    </h1>
+    <div class="about-content">
+        <h1>
+            Чему Научимся?
+        </h1>
 
-    <div class="about-row about-first-row">
-      <div class="about-item first-poster poster">
-        <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
-        <p >
-          Адаптивная верстка
-        </p>
-      </div>
+        <div class="about-row about-first-row">
+            <div class="about-item first-poster poster">
+                <img src="../media/svgs/smartphone-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+                <p >
+                    Адаптивная верстка
+                </p>
+            </div>
 
-      <div class="about-item sam-poster poster">
-      </div>
+            <div class="about-item sam-poster poster">
+            </div>
 
-      <div class="about-item second-poster poster">
-        <img src="../media/svgs/web-security-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
-        <p >
-          Веб-Безопасность
-        </p>
-      </div>
+            <div class="about-item second-poster poster">
+                <img src="../media/svgs/web-security-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+                <p >
+                    Веб-Безопасность
+                </p>
+            </div>
 
 
 
-      <div class="about-item third-poster poster">
-        <img src="../media/svgs/code-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
-        <p >
-          Фреймворки
-        </p>
-      </div>
+            <div class="about-item third-poster poster">
+                <img src="../media/svgs/code-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+                <p >
+                    Фреймворки
+                </p>
+            </div>
+        </div>
+
+        <div class="about-row about-first-row">
+            <div class="about-item js-poster poster">
+            </div>
+
+            <div class="about-item fourth-poster poster">
+                <img src="../media/svgs/api-settings-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+                <p >
+                    Интеграция REST API
+                </p>
+            </div>
+
+            <div class="about-item fifth-poster poster">
+                <img src="../media/svgs/brand-dreamworks-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
+                <p >
+                    Работа с анимациями
+                </p>
+            </div>
+
+
+
+            <div class="about-item garazh-poster poster">
+            </div>
+        </div>
     </div>
-
-      <div class="about-row about-first-row">
-          <div class="about-item js-poster poster">
-          </div>
-
-          <div class="about-item fourth-poster poster">
-              <img src="../media/svgs/api-settings-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
-              <p >
-                  Интеграция REST API
-              </p>
-          </div>
-
-          <div class="about-item fifth-poster poster">
-              <img src="../media/svgs/brand-dreamworks-svgrepo-com.svg" alt="smartphone-svg" width="800" height="800">
-              <p >
-                  Работа с анимациями
-              </p>
-          </div>
-
-
-
-          <div class="about-item garazh-poster poster">
-          </div>
-      </div>
-  </div>
 </section>
 <section id="courses" class="section courses">
     <h1> Учебные Материалы</h1>
     <div class="courses-content">
-        <div class="cassete-container">
-            <div class="cassete-stash">
-                <div class="cassete-item">
-                    <img src="../media/cassets/cassete_11.png" alt="1-cassete" width="1000" height="1000">
-                </div>
-                <div class="cassete-item">
-                    <img src="../media/cassets/cassete_22.png" alt="1-cassete" width="1000" height="1000">
-                </div>
-                <div class="cassete-item">
-                    <img src="../media/cassets/cassete_33.png" alt="1-cassete" width="1000" height="1000">
-                </div>
-                <div class="cassete-item">
-                    <img src="../media/cassets/middle_cassete.png" alt="1-cassete" width="1000" height="1000">
-                </div>
-                <div class="cassete-item">
-                    <img src="../media/cassets/cassete_44.png" alt="1-cassete" width="1000" height="1000">
-                </div>
-                <div class="cassete-item">
-                    <img src="../media/cassets/cassete_55.png" alt="1-cassete" width="1000" height="1000">
-                </div>
-                <div class="cassete-item">
-                    <img src="../media/cassets/cassete_66.png" alt="1-cassete" width="1000" height="1000">
-                </div>
-                <div class="cassete-item">
-                    <img src="../media/cassets/cassete_77.png" alt="1-cassete" width="1000" height="1000">
-                </div>
+    </div>
 
-            </div>
+    <template id="cassets-template">
+        <div class="cassete-container">
+            {{#data}}
+            <a href="/course/presentation.html?id={{id}}">
+                {{#assets}}
+                <div class="cassete-item pickable">
+                    <img src="https://steadfast-champion-93368c3d1a.strapiapp.com{{url}}" alt="{{name}}" width="50" height="1000">
+                </div>
+                {{/assets}}
+            </a>
+            {{/data}}
             <div class="cassete-stash horizontal"></div>
         </div>
+    </template>
+
+
+    <div hx-get="https://steadfast-champion-93368c3d1a.strapiapp.com/api/presentations/assets"
+         hx-vals='js:{id: new URLSearchParams(window.location.search).get("id")}'
+         hx-target=".courses-content"
+         hx-trigger="load"
+         hx-ext="client-side-templates"
+         mustache-template="cassets-template">
     </div>
 
 
@@ -196,7 +198,7 @@
 
                 <div class="swiper-slide">
                     <div class="specialist-card" onclick="openModal('teacher1', '../media/Sevich.png')">
-                         <img src="../media/portraits/Sevich.png" alt="teacher-img">
+                        <img src="../media/portraits/Sevich.png" alt="teacher-img">
                     </div>
                 </div>
 
@@ -219,25 +221,25 @@
     </div>
 </section>
 <section id="map">
-  <div class="map">
-    <h2>Где происходят занятия?</h2>
-    <div class="map-container">
-        <div class="uni-info">
-            <img src="../media/p13514.jpg" alt="teacher-img">
-        </div>
-        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A91c9e8cd5d7cf6e58212a0d625727b300d4478cd67567abbcd1811ca9b6567c0&amp;width=100%25&amp;height=608&amp;lang=ru_RU&amp;scroll=true"></script>
-    </div>
-  </div>
-  <div>
-    <div class="contacts-row">
-        <div class="contact-item">
-            <svg class="icon" viewBox="0 0 24 24" fill="#4285F4">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-            </svg>
-            <span class="contact-text">Санкт-Петербург, Саблинская улица, 14</span>
+    <div class="map">
+        <h2>Где происходят занятия?</h2>
+        <div class="map-container">
+            <div class="uni-info">
+                <img src="../media/p13514.jpg" alt="teacher-img">
+            </div>
+            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A91c9e8cd5d7cf6e58212a0d625727b300d4478cd67567abbcd1811ca9b6567c0&amp;width=100%25&amp;height=608&amp;lang=ru_RU&amp;scroll=true"></script>
         </div>
     </div>
-  </div>
+    <div>
+        <div class="contacts-row">
+            <div class="contact-item">
+                <svg class="icon" viewBox="0 0 24 24" fill="#4285F4">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                <span class="contact-text">Санкт-Петербург, Саблинская улица, 14</span>
+            </div>
+        </div>
+    </div>
 </section>
 
 <div id="teacher1-modal" class="modal">
@@ -246,36 +248,36 @@
             <span class="close-btn" onclick="closeModal('teacher1')">&times;</span>
         </div>
         <div class="modal-container">
-          <img src="" alt="photo" width="200" height="300">
-          <div>
-            <h1>ФИО с Бэкэнда</h1>
-            <p>Описание с Бэкэнда по типу Студент 3-го курса университета ИТМО, семинарист. 
-            Разработал и представил лекцию по xxxx второго семестра по фронтенд разработке</p>
+            <img src="" alt="photo" width="200" height="300">
+            <div>
+                <h1>ФИО с Бэкэнда</h1>
+                <p>Описание с Бэкэнда по типу Студент 3-го курса университета ИТМО, семинарист.
+                    Разработал и представил лекцию по xxxx второго семестра по фронтенд разработке</p>
 
-          </div>
+            </div>
         </div>
     </div>
 </div>
 
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
-      new Swiper('.swiper', {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-          576: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          992: { slidesPerView: 4 }
-        },
-        loop: false,
-        centeredSlides: false,
-        slideToClickedSlide: false
-      });
+        new Swiper('.swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                576: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
+                992: { slidesPerView: 4 }
+            },
+            loop: false,
+            centeredSlides: false,
+            slideToClickedSlide: false
+        });
     });
 
     function openModal(teacherId, imgSrc) {
@@ -298,6 +300,6 @@
             document.body.style.overflow = 'auto';
         }
     }
-  </script>
+</script>
 </body>
 </html>
