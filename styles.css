@@ -77,18 +77,17 @@ body {
 
 .general-info {
     width: 100%;
-    aspect-ratio: 16 / 16;
+    aspect-ratio: 4 / 3;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     gap: 0.5%;
     padding: 1%;
-
 }
 
 .general-info-card{
     width: 100%;
-    aspect-ratio: 7 / 8;
+    aspect-ratio: 4 / 1;
     display: flex;
     flex-direction: column;
     padding: 5% 3% 3%;
@@ -166,6 +165,7 @@ body {
     overflow: hidden;
     padding: 5%;
     margin-bottom: 2%;
+    text-align: center;
 }
 
 .teacher-card img {
@@ -187,23 +187,23 @@ body {
 
 .teacher-info h1{
     color: #80efff;
-    font-size: 90%;
+    font-size:2vh;
 }
 .teacher-info p{
-    font-size: 80%;
+    font-size: 1.5vh;
     color: #627c79;
 }
 
 .tags{
-    display: flex;
+    display: grid;
     flex-direction: row;
     justify-content: start;
     width: 100%;
     gap: 5%;
-    aspect-ratio: 15 / 1;
     padding: 0 5%;
     color: #bd96e1;
     margin-bottom: 2%;
+    grid-template-columns: repeat(4,  1fr);
 }
 
 .tag {
@@ -211,6 +211,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 1% 5%;
+    margin-bottom: 5%;
 }
 
 .continue-button {
