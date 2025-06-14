@@ -6,46 +6,83 @@
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <script src="https://unpkg.com/htmx-ext-client-side-templates@2.0.0/client-side-templates.js"></script>
     <script src="https://unpkg.com/mustache@latest"></script>
-    <script src="/logout.js"></script>
+    <script src="/header/logout.js"></script>
 </head>
 
 <style>
+
+    @font-face {
+        font-family: 'ALK';
+        src: url(fonts/alk-life-webfont.ttf);
+    }
+
     body {
         margin: 0;
         padding: 20px;
         font-family: Arial, sans-serif;
-        background: #f7f7f7;
         display: flex;
         flex-direction: column;
         align-items: center;
+        background: url(media/wall.jpg) repeat;
+        height: 100%;
+        font-family: 'ALK';
+        
     }
     .card {
-        width: 300px;
-        background: white;
+        width: 400px;
+        height: 56vh;
         border-radius: 10px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
-        padding: 15px;
+        padding: 15px 30px;
         text-align: center;
+        padding-top: 2%;
+        background: url(media/wall_splat.png) no-repeat;
+        background-size: 100% 100%;
     }
+    
+
     .card-image {
-        width: 100%;
+        width: 70%;
         height: 180px;
         object-fit: cover;
         border-radius: 8px;
         margin-bottom: 10px;
     }
     .card-text {
-        color: #333;
-        font-size: 14px;
+        color: black;
+        font-family: 'ALK';
+        font-size: 20px;
+        padding: 0% 2%;
     }
     a {
         text-decoration: none;
     }
 
     span {
+        color: rgb(11, 11, 241);
+        text-align: justify;
+    }
+
+    .fav-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .logout-btn, .back-bttn {
+        background-color: rgb(128, 128, 128);
+        font-size: 30px;
+        border-radius: 5%;
+        color: blue;
+        
+    }
+
+    .ttx {
         color: blue;
     }
+    
+
 </style>
 
 
@@ -56,9 +93,10 @@
     </div>
     <template id="login-template">
         <div style="display: flex; flex-flow: row">
-            <h1>{{username}}</h1>
-            <button onclick="returnPage()">Вернуться</button>
+            <h1 class="ttx">{{username}}</h1>
+            <button onclick="returnPage()" class="back-bttn">Вернуться</button>
             <button class="logout-btn" onclick="logout()">Выйти</button>
+            
         </div>
     </template>
 
@@ -72,19 +110,19 @@
     </div>
 </header>
 
-<div id="favourite-result"></div>
+<div id="favourite-result" class="fav-container"></div>
 
 <template id="presentations-template">
     {{#presentations}}
     <div class="card">
         <h2>{{name}}</h2>
-        <a href="./presentation.html?id={{id}}">
+        <a href="./course/presentation.html?id={{id}}">
             <img src={{preview}} width="400" class="card-image">
         </a>
         <p class="card-text">{{description}}</p>
         <p>Выступающие: </p>
         {{#speakers}}
-        <a href="./speaker.html?id={{id}}">
+        <a href="./course/speaker.html?id={{id}}">
             <h3>{{name}}</h3>
         </a>
         {{/speakers}}
