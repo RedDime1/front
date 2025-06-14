@@ -309,6 +309,29 @@
 </div>
 
 <script>
+  document.body.addEventListener('htmx:afterSwap', function(evt) {
+    if (evt.detail.target.id === 'global-reply-form' && evt.detail.target.innerHTML.trim() !== '') {
+      evt.detail.target.classList.add('active');
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (e.target.matches('#global-reply-form button[type="button"]')) {
+      const form = e.target.closest('#global-reply-form');
+      form.classList.remove('active');
+      setTimeout(() => form.innerHTML = '', 300);
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    const form = document.getElementById('global-reply-form');
+    if (form && form.classList.contains('active') && !form.contains(e.target)) {
+      form.classList.remove('active');
+      setTimeout(() => form.innerHTML = '', 300);
+    }
+  });
+
+
   document.body.addEventListener('htmx:afterRequest', function (evt) {
     if (evt.detail.requestConfig.path.includes('page=1')) {
       console.log(evt.detail)
